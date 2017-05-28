@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is simple Rails App that use for manage school data and give SMS notification
 
-Things you may want to cover:
+Things you may can learn from this app:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Simple rails apps that connect with MySQL database
+* Authentiction (sign in, sign up, logout)
+* Search form with ajax

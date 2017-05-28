@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :main,:as => "nilais" 
   resources :mp , :as => "mata_pelajarans"
   resources :mahasiswa , :as => "mahasiswas"
