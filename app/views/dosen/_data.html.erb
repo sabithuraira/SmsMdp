@@ -1,0 +1,16 @@
+<tr>
+    <th>Nama</th>
+    <th>Action</th>
+</tr>
+<% @datas.each do |data| %>
+    <tr>
+    <td><%= data.name %></td>
+    <td>
+        <%= link_to raw('<i class="fa fa-search"></i> Show'), mata_pelajaran_path(data), class: "btn btn-box-tool btn-default" %>
+        <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_mata_pelajaran_path(data), class: "btn btn-box-tool btn-default" %>
+        <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), mata_pelajaran_path(data), class: "btn btn-box-tool btn-default" , 
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+    </td>
+    </tr>
+<% end %>

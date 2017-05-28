@@ -1,0 +1,31 @@
+<div class="box box-widget widget-user-2">
+    <div class="box-header with-border">
+        <h3 class="box-title">Data Detail Nilai</h3>
+
+        <div class="box-tools pull-right">
+        <%= link_to raw('<i class="fa fa-list"></i> List'), nilais_path, class: "btn btn-box-tool btn-default" %>
+        <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_nilai_path, class: "btn btn-box-tool btn-default" %>
+        <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_nilai_path(@data), class: "btn btn-box-tool btn-default" %>
+        <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), nilai_path(@data), class: "btn btn-box-tool btn-default" , 
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+    
+        </div>
+    </div>
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header">
+        <!-- /.widget-user-image -->
+        <h3 class="widget-user-username"><%= @data.mahasiswa.name %></h3>
+        <h5 class="widget-user-desc"><%= @data.mata_pelajaran.name %></h5>
+        <h5 class="widget-user-desc">Semester <%= @data.semester %></h5>
+        <h5 class="widget-user-desc">Tahun Ajaran <%= @data.tahun_ajaran %></h5>
+        <h5 class="widget-user-desc"><%= @data.dosen.nil? ? "" : @data.dosen.name %></h5>
+        <h5 class="widget-user-desc"><%= @data.nilai %></h5>
+    </div>
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked">
+        <li><a href="#">Created Date <span class="pull-right"><%= @data.created_at %></span></a></li>
+        <li><a href="#">Last Modified <span class="pull-right"><%= @data.updated_at %></span></a></li>
+         </ul>
+    </div>
+</div>

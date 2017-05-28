@@ -1,0 +1,2 @@
+class DosenController < ApplicationController
+end

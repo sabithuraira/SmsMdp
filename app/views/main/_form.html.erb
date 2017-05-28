@@ -1,0 +1,59 @@
+<% if @data.errors.any? %>
+<div class="box-body">
+  <div class="alert alert-danger">
+    <ul>
+      <% @data.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<%= form_for @data do |f| %>
+
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Mahasiswa</label>
+            <%= f.collection_select :mahasiswa, Mahasiswa.all, :id, :name, {:prompt=>"Pilih Mahasiswa"}, {:class=>"form-control"} %>
+          </div>
+          <!-- /.form-group -->
+          <div class="form-group">
+            <label>Mata Kuliah</label>
+            <%= f.collection_select :mp, MataPelajaran.all, :id, :name, {:prompt=>"Pilih Mata Pelajaran"}, {:class=>"form-control"} %>
+          </div>
+          <!-- /.form-group -->
+
+          <!-- /.form-group -->
+          <div class="form-group">   
+            <label>Tahun Ajaran</label>
+            <%= f.text_field :tahun_ajaran, class: "form-control", placeholder: "Tahun Ajaran" %>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+          <!-- /.form-group -->
+          <div class="form-group">   
+            <label>Semester</label>
+            <%= f.select :semester, [["Ganjil",1],["Genap",2]], {:prompt=>"Pilih Semester"}, {:class=>"form-control"} %>
+          </div>
+
+          <div class="form-group">
+            <label>Nilai</label>
+              <%= f.number_field :nilai, step: :any,  class: "form-control", placeholder: "Masukkan Nilai" %>
+          </div>
+          <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.box-body -->
+
+    <div class="box-footer">
+      <!--<button type="submit" class="btn btn-default">Cancel</button>-->
+      <button type="submit" class="btn btn-info pull-right">Submit</button>
+    </div>
+  <% end %>

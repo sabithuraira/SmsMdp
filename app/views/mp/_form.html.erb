@@ -1,0 +1,21 @@
+<%= form_for @data do |f| %>
+<div class="box-body">
+    <div class="row">
+    <!-- /.col -->
+    <div class="col-md-12">
+
+        <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", placeholder: "Masukkan Nilai" %>
+        </div>
+        <!-- /.form-group -->
+    </div>
+    </div>
+
+</div>
+
+<div class="box-footer">
+<button type="submit" class="btn btn-info pull-right">Submit</button>
+</div>
+
+<% end %>
