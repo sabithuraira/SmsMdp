@@ -10,7 +10,18 @@
   </head>
 
 <body class="hold-transition login-page">
-    <%= yield %>
+  <div class="login-box">
+    <div class="login-box-body">
+      <% unless notice.nil? %>
+        <div class="alert alert-info"><%= notice %></div>
+      <% end %>
+      <% unless alert.nil? %>
+        <div class="alert alert-warning"><%= alert %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+    
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
 </body>
 </html>

@@ -15,15 +15,14 @@
         
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">Sabit Huraira</span>
+              <span class="hidden-xs"><%= current_user.email %></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
 
                 <p>
-                  Sabit Huraira - Software Engineer
-                  <small>Member since Nov. 2012</small>
+                  <%= current_user.email %>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -47,7 +46,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-default btn-flat" %>
                 </div>
               </li>
             </ul>

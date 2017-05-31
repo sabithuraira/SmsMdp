@@ -1,18 +1,16 @@
 class MainController < ApplicationController
-    layout "blank", only: [:login]
+    #layout "blank", only: [:login]
     before_filter :authenticate_user!, except: [:login, :signin]
 
     def index
         @datas = Nilai.all
     end
 
-    def login
+    #def login
+    #end
 
-    end
-
-    def signin
-
-    end
+    #def signin
+    #end
 
     def search
         @datas = Nilai.all
@@ -65,5 +63,10 @@ class MainController < ApplicationController
     private
     def nilai_params
         params.require(:nilai).permit(:dosen,:mp,:mahasiswa,:tahun_ajaran,:semester,:nilai)
+    end
+
+    private
+    def login_params
+        params.require(:session).permit(:email,:password, :nilai)
     end
 end

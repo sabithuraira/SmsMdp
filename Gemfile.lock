@@ -168,7 +168,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt
   byebug
   coffee-rails (~> 4.2)
   devise
