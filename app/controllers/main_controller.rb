@@ -1,16 +1,9 @@
 class MainController < ApplicationController
-    #layout "blank", only: [:login]
-    before_filter :authenticate_user!, except: [:login, :signin]
+    before_filter :authenticate_user!
 
     def index
         @datas = Nilai.all
     end
-
-    #def login
-    #end
-
-    #def signin
-    #end
 
     def search
         @datas = Nilai.all

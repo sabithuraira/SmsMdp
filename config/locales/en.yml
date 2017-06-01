@@ -20,6 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  title: 
+    header: SMS Gateway STMIK MDP
+    logomini:
+      b1: SS
+      b2: MDP
+    logolg:
+      b1: SMS STMIK
+      b2: MDP
+  navigation:
+    header: MENU UTAMA
   hello: "Hello world"
   helpers:
     label:

@@ -1,8 +1,8 @@
 <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
-      <span class="logo-mini"><b>SS</b>MDP</span>
-      <span class="logo-lg"><b>SMS STMIK</b>MDP</span>
+      <span class="logo-mini"><b><%= t('title.logomini.b1') %></b><%= t('title.logomini.b2') %></span>
+      <span class="logo-lg"><b><%= t('title.logolg.b1') %></b><%= t('title.logolg.b2') %></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -12,7 +12,6 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           
-        
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="hidden-xs"><%= current_user.email %></span>

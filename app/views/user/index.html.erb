@@ -6,7 +6,7 @@
         
         <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_user_path, class: "btn btn-box-tool btn-default" %> 
         <div class="box-tools">
-          <%= form_tag({controller: "mp", action: "search"}, method: "post", id: "form_index") do %>
+          <%= form_tag({controller: "user", action: "search"}, method: "post", id: "form_index") do %>
             <div class="input-group input-group-sm" style="width: 150px;">
               <input type="text" id="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -22,12 +22,14 @@
         <table class="table table-hover" id="table_data">
           <tr>
             <th>Nama</th>
+            <th>Email</th>
             <th>Action</th>
           </tr>
 
           <% @datas.each do |data| %>
             <tr>
             <td><%= data.name %></td>
+            <td><%= data.email %></td>
             <td>
                 <%= link_to raw('<i class="fa fa-search"></i> Show'), user_path(data), class: "btn btn-box-tool btn-default" %>
                 <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_user_path(data), class: "btn btn-box-tool btn-default" %>

@@ -15,90 +15,29 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MENU UTAMA</li>
+        <li class="header"><%= t('navigation.header') %></li>
         <li class="active treeview">
           <%= link_to raw('<i class="fa fa-dashboard"></i> Dashboard'), nilais_path %>
         </li>
-
+          
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-bar-chart"></i>
-            <span>Peringkat</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-              <small class="label pull-right bg-red">HOT</small>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Per Tahun</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Per Bulan</a></li>
-          </ul>
-        </li>
-
-         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-child"></i>
-            <span>Unit Kerja</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> IPDS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Tata Usaha</a></li>
-          </ul>
+          <%= link_to raw('<i class="fa fa-bar-chart"></i> Nilai'), nilais_path %>
         </li>
 
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-group"></i>
-            <span>BPS Kab/Kota</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> IPDS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Tata Usaha</a></li>
-          </ul>
+          <%= link_to raw('<i class="fa fa-group"></i> Mahasiswa'), mahasiswas_path %>
         </li>
 
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i>
-            <span>Bina Program</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-
-          </ul>
-        </li>
-
-
-        <li>
-          <a href="calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
+          <%= link_to raw('<i class="fa fa-table"></i> Mata Pelajaran'), mata_pelajarans_path %>
         </li>
 
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder-o"></i>
-            <span>Data Master</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> IPDS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Tata Usaha</a></li>
-          </ul>
+          <%= link_to raw('<i class="fa fa-child"></i> User'), users_path %>
+        </li>
+
+        <li class="treeview">
+          <%= link_to raw('<i class="fa fa-sign-out"></i> Sign Out'), destroy_user_session_path, method: :delete %>
         </li>
        </ul>
     </section>
