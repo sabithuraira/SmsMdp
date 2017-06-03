@@ -1,0 +1,44 @@
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: Using SQL service
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: Configuring Gammu SMSD...
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: PIN code is "1234"
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: CommTimeout=30, SendTimeout=30, ReceiveFrequency=0, ResetFrequency=0, HardResetFrequency=0
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: checks: CheckSecurity=1, CheckBattery=1, CheckSignal=1
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: mode: Send=1, Receive=1
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: deliveryreport = no
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: phoneid = 
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: Connected to driver myodbc5w.dll
+Tue 2014/05/20 08:04:23 gammu-smsd[8756]: Execute SQL: SELECT  `ID` FROM outbox LIMIT 1
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Execute SQL: SELECT  `ID` FROM outbox_multipart LIMIT 1
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Execute SQL: SELECT  `ID` FROM sentitems LIMIT 1
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Execute SQL: SELECT  `ID` FROM inbox LIMIT 1
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Execute SQL: SELECT `Version` FROM gammu
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Database structures version: 13, SMSD current version: 13
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Connected to Database odbc: gammu on MysqlUnicode
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Created Windows RW shared memory at 0000000002250000
+Tue 2014/05/20 08:04:24 gammu-smsd[8756]: Starting phone communication...
+Tue 2014/05/20 08:04:32 gammu-smsd[8756]: Execute SQL: DELETE FROM phones WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:04:32 gammu-smsd[8756]: Inserting phone info
+Tue 2014/05/20 08:04:32 gammu-smsd[8756]: Execute SQL: INSERT INTO phones (`IMEI`, `ID`, `Send`, `Receive`, `InsertIntoDB`, `TimeOut`, `Client`, `Battery`, `Signal`) VALUES ("357123038412895", "", "yes", "yes", NOW(), (NOW() + INTERVAL 10 SECOND) + 0, "Gammu 1.33.0, Windows Server 2007 SP1, GCC 4.7, MinGW 3.11", -1, -1)
+Tue 2014/05/20 08:04:33 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:04:33 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 48 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:04:49 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 51 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:05:03 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:05:05 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 48 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:05:21 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 45 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:05:33 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:05:37 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 48 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:05:53 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 45 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:06:03 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:06:09 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 51 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:06:25 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 51 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:06:33 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:06:41 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 54 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:06:56 gammu-smsd[8756]: Read 0 messages
+Tue 2014/05/20 08:06:56 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 57 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:07:04 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:07:12 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 54 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:07:28 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 54 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:07:34 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
+Tue 2014/05/20 08:07:44 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 57 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:08:00 gammu-smsd[8756]: Execute SQL: UPDATE phones SET `TimeOut`= (NOW() + INTERVAL 10 SECOND) + 0, `Battery` = 0, `Signal` = 54 WHERE `IMEI` = "357123038412895"
+Tue 2014/05/20 08:08:04 gammu-smsd[8756]: Execute SQL: SELECT `ID`, `InsertIntoDB`, `SendingDateTime`, `SenderID` FROM outbox WHERE `SendingDateTime` < NOW() AND `SendingTimeOut` < NOW() AND `SendBefore` >= CURTIME() AND `SendAfter` <= CURTIME() AND ( `SenderID` is NULL OR `SenderID` = '' OR `SenderID` = "" ) ORDER BY `InsertIntoDB` ASC LIMIT 1
