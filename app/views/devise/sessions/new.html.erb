@@ -29,6 +29,9 @@
     <div class="col-xs-12">
       <%= link_to raw("<i class='fa fa-google-plus'></i> Sign in with Google"), user_google_oauth2_omniauth_authorize_path, 
           class:"btn btn-block btn-social btn-google btn-flat" %>
+
+      <%= link_to raw("<i class='fa fa-facebook'></i> Sign in with Facebook"), user_facebook_omniauth_authorize_path, 
+          class:"btn btn-block btn-social btn-facebook btn-flat" %>
     </div>
   </div>
 <% end %>

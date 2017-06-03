@@ -16,6 +16,7 @@ gem 'mysql2'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
