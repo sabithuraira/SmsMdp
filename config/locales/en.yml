@@ -21,13 +21,13 @@
 
 en:
   title: 
-    header: SMS Gateway STMIK MDP
+    header: PKN STAN
     logomini:
-      b1: SS
-      b2: MDP
+      b1: PKN
+      b2: STAN
     logolg:
-      b1: SMS STMIK
-      b2: MDP
+      b1: PKN
+      b2: STAN
   navigation:
     header: MENU UTAMA
   hello: "Hello world"

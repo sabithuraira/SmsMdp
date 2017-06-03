@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, 
-      # controllers: {
-      #   sessions: 'users/sessions',
-      #   registrations: 'users/registrations',
-      # }, 
+      controllers: { omniauth_callbacks: 'omniauth_callbacks' },
       path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
+
   resources :main,:as => "nilais" 
   resources :mp , :as => "mata_pelajarans"
   resources :mahasiswa , :as => "mahasiswas"

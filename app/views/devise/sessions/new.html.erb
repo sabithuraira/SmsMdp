@@ -26,6 +26,10 @@
       <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
     </div>
     <!-- /.col -->
+    <div class="col-xs-12">
+      <%= link_to raw("<i class='fa fa-google-plus'></i> Sign in with Google"), user_google_oauth2_omniauth_authorize_path, 
+          class:"btn btn-block btn-social btn-google btn-flat" %>
+    </div>
   </div>
 <% end %>
 
