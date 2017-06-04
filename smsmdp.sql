@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2017 at 01:37 AM
+-- Generation Time: Jun 04, 2017 at 02:58 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -43,6 +43,17 @@ INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `daemons`
+--
+
+CREATE TABLE `daemons` (
+  `Start` text NOT NULL,
+  `Info` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `dosens`
 --
 
@@ -55,6 +66,56 @@ CREATE TABLE `dosens` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gammu`
+--
+
+CREATE TABLE `gammu` (
+  `Version` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `gammu`
+--
+
+INSERT INTO `gammu` (`Version`) VALUES
+(13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inbox`
+--
+
+CREATE TABLE `inbox` (
+  `UpdatedInDB` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ReceivingDateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `Text` text NOT NULL,
+  `SenderNumber` varchar(20) NOT NULL DEFAULT '',
+  `Coding` enum('Default_No_Compression','Unicode_No_Compression','8bit','Default_Compression','Unicode_Compression') NOT NULL DEFAULT 'Default_No_Compression',
+  `UDH` text NOT NULL,
+  `SMSCNumber` varchar(20) NOT NULL DEFAULT '',
+  `Class` int(11) NOT NULL DEFAULT '-1',
+  `TextDecoded` text NOT NULL,
+  `ID` int(10) UNSIGNED NOT NULL,
+  `RecipientID` text NOT NULL,
+  `Processed` enum('false','true') NOT NULL DEFAULT 'false'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Triggers `inbox`
+--
+DELIMITER $$
+CREATE TRIGGER `inbox_timestamp` BEFORE INSERT ON `inbox` FOR EACH ROW BEGIN
+    IF NEW.ReceivingDateTime = '0000-00-00 00:00:00' THEN
+        SET NEW.ReceivingDateTime = CURRENT_TIMESTAMP();
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -78,7 +139,8 @@ CREATE TABLE `mahasiswas` (
 
 INSERT INTO `mahasiswas` (`id`, `name`, `nim`, `date_birth`, `place_birth`, `created_at`, `updated_at`) VALUES
 (1, 'Abidzar Ghifari', NULL, NULL, NULL, '2017-05-27 15:09:40', '2017-05-27 15:09:40'),
-(2, 'Zea Shakira Sabit', '1000002', '2016-09-25', 'Palembang', '2017-05-27 15:29:20', '2017-05-27 15:29:20');
+(2, 'Zea Shakira Sabit', '1000002', '2016-09-25', 'Palembang', '2017-05-27 15:29:20', '2017-05-27 15:29:20'),
+(3, 'Abdul', '8990', '2012-08-08', 'kjkj', '2017-06-03 03:47:26', '2017-06-03 03:47:43');
 
 -- --------------------------------------------------------
 
@@ -130,6 +192,127 @@ INSERT INTO `nilais` (`id`, `dosen`, `mp`, `mahasiswa`, `tahun_ajaran`, `semeste
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `outbox`
+--
+
+CREATE TABLE `outbox` (
+  `UpdatedInDB` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `InsertIntoDB` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `SendingDateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `SendBefore` time NOT NULL DEFAULT '23:59:59',
+  `SendAfter` time NOT NULL DEFAULT '00:00:00',
+  `Text` text,
+  `DestinationNumber` varchar(20) NOT NULL DEFAULT '',
+  `Coding` enum('Default_No_Compression','Unicode_No_Compression','8bit','Default_Compression','Unicode_Compression') NOT NULL DEFAULT 'Default_No_Compression',
+  `UDH` text,
+  `Class` int(11) DEFAULT '-1',
+  `TextDecoded` text NOT NULL,
+  `ID` int(10) UNSIGNED NOT NULL,
+  `MultiPart` enum('false','true') DEFAULT 'false',
+  `RelativeValidity` int(11) DEFAULT '-1',
+  `SenderID` varchar(255) DEFAULT NULL,
+  `SendingTimeOut` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `DeliveryReport` enum('default','yes','no') DEFAULT 'default',
+  `CreatorID` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Triggers `outbox`
+--
+DELIMITER $$
+CREATE TRIGGER `outbox_timestamp` BEFORE INSERT ON `outbox` FOR EACH ROW BEGIN
+    IF NEW.InsertIntoDB = '0000-00-00 00:00:00' THEN
+        SET NEW.InsertIntoDB = CURRENT_TIMESTAMP();
+    END IF;
+    IF NEW.SendingDateTime = '0000-00-00 00:00:00' THEN
+        SET NEW.SendingDateTime = CURRENT_TIMESTAMP();
+    END IF;
+    IF NEW.SendingTimeOut = '0000-00-00 00:00:00' THEN
+        SET NEW.SendingTimeOut = CURRENT_TIMESTAMP();
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `outbox_multipart`
+--
+
+CREATE TABLE `outbox_multipart` (
+  `Text` text,
+  `Coding` enum('Default_No_Compression','Unicode_No_Compression','8bit','Default_Compression','Unicode_Compression') NOT NULL DEFAULT 'Default_No_Compression',
+  `UDH` text,
+  `Class` int(11) DEFAULT '-1',
+  `TextDecoded` text,
+  `ID` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `SequencePosition` int(11) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pbk`
+--
+
+CREATE TABLE `pbk` (
+  `ID` int(11) NOT NULL,
+  `GroupID` int(11) NOT NULL DEFAULT '-1',
+  `Name` text NOT NULL,
+  `Number` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pbk_groups`
+--
+
+CREATE TABLE `pbk_groups` (
+  `Name` text NOT NULL,
+  `ID` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phones`
+--
+
+CREATE TABLE `phones` (
+  `ID` text NOT NULL,
+  `UpdatedInDB` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `InsertIntoDB` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `TimeOut` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `Send` enum('yes','no') NOT NULL DEFAULT 'no',
+  `Receive` enum('yes','no') NOT NULL DEFAULT 'no',
+  `IMEI` varchar(35) NOT NULL,
+  `Client` text NOT NULL,
+  `Battery` int(11) NOT NULL DEFAULT '-1',
+  `Signal` int(11) NOT NULL DEFAULT '-1',
+  `Sent` int(11) NOT NULL DEFAULT '0',
+  `Received` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Triggers `phones`
+--
+DELIMITER $$
+CREATE TRIGGER `phones_timestamp` BEFORE INSERT ON `phones` FOR EACH ROW BEGIN
+    IF NEW.InsertIntoDB = '0000-00-00 00:00:00' THEN
+        SET NEW.InsertIntoDB = CURRENT_TIMESTAMP();
+    END IF;
+    IF NEW.TimeOut = '0000-00-00 00:00:00' THEN
+        SET NEW.TimeOut = CURRENT_TIMESTAMP();
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `schema_migrations`
 --
 
@@ -153,6 +336,49 @@ INSERT INTO `schema_migrations` (`version`) VALUES
 ('20170528133631'),
 ('20170528165619'),
 ('20170531021659');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sentitems`
+--
+
+CREATE TABLE `sentitems` (
+  `UpdatedInDB` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `InsertIntoDB` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `SendingDateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `DeliveryDateTime` timestamp NULL DEFAULT NULL,
+  `Text` text NOT NULL,
+  `DestinationNumber` varchar(20) NOT NULL DEFAULT '',
+  `Coding` enum('Default_No_Compression','Unicode_No_Compression','8bit','Default_Compression','Unicode_Compression') NOT NULL DEFAULT 'Default_No_Compression',
+  `UDH` text NOT NULL,
+  `SMSCNumber` varchar(20) NOT NULL DEFAULT '',
+  `Class` int(11) NOT NULL DEFAULT '-1',
+  `TextDecoded` text NOT NULL,
+  `ID` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `SenderID` varchar(255) NOT NULL,
+  `SequencePosition` int(11) NOT NULL DEFAULT '1',
+  `Status` enum('SendingOK','SendingOKNoReport','SendingError','DeliveryOK','DeliveryFailed','DeliveryPending','DeliveryUnknown','Error') NOT NULL DEFAULT 'SendingOK',
+  `StatusError` int(11) NOT NULL DEFAULT '-1',
+  `TPMR` int(11) NOT NULL DEFAULT '-1',
+  `RelativeValidity` int(11) NOT NULL DEFAULT '-1',
+  `CreatorID` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Triggers `sentitems`
+--
+DELIMITER $$
+CREATE TRIGGER `sentitems_timestamp` BEFORE INSERT ON `sentitems` FOR EACH ROW BEGIN
+    IF NEW.InsertIntoDB = '0000-00-00 00:00:00' THEN
+        SET NEW.InsertIntoDB = CURRENT_TIMESTAMP();
+    END IF;
+    IF NEW.SendingDateTime = '0000-00-00 00:00:00' THEN
+        SET NEW.SendingDateTime = CURRENT_TIMESTAMP();
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -185,8 +411,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `date_birth`, `place_birth`, `created_at`, `updated_at`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`) VALUES
-(1, NULL, NULL, NULL, NULL, '2017-05-31 05:09:44', '2017-05-31 11:32:59', 'sabitzhabit@gmail.com', '$2a$11$8gQN9l3yDZuQhUkIR5.LWO2ShA5zMoqnGT41y8RwdSwFZQohOcMQq', NULL, NULL, NULL, 2, '2017-05-31 11:32:59', '2017-05-31 05:09:44', '127.0.0.1', '127.0.0.1'),
-(2, NULL, NULL, NULL, NULL, '2017-05-31 05:36:47', '2017-05-31 05:36:47', 'fithri.selva@gmail.com', '$2a$11$flaJjtfjDYPq1w08HBkQmeBP3ny43M00DQezCin0ef/taPdUJDs3C', NULL, NULL, NULL, 1, '2017-05-31 05:36:47', '2017-05-31 05:36:47', '127.0.0.1', '127.0.0.1');
+(2, NULL, NULL, NULL, NULL, '2017-05-31 05:36:47', '2017-05-31 05:36:47', 'fithri.selva@gmail.com', '$2a$11$flaJjtfjDYPq1w08HBkQmeBP3ny43M00DQezCin0ef/taPdUJDs3C', NULL, NULL, NULL, 1, '2017-05-31 05:36:47', '2017-05-31 05:36:47', '127.0.0.1', '127.0.0.1'),
+(3, 'Farifam Store', NULL, NULL, NULL, '2017-06-03 17:38:48', '2017-06-03 17:39:21', 'farifamstore2nd@gmail.com', '$2a$11$XRb/GP6GTQBaqS9oHVHehO.3oD6TBDB8pviVFlZ7PMMFUwAYRdYN.', NULL, NULL, NULL, 2, '2017-06-03 17:39:21', '2017-06-03 17:38:48', '127.0.0.1', '127.0.0.1'),
+(4, 'Sabit Huraira', NULL, NULL, NULL, '2017-06-03 19:50:18', '2017-06-03 19:50:38', 'sabitzhabit@gmail.com', '$2a$11$n.Rce04oK1pi.WqXDHXamu8fY.M0A/LE08EscBU45lxYhYhvXmldC', NULL, NULL, NULL, 2, '2017-06-03 19:50:38', '2017-06-03 19:50:18', '127.0.0.1', '127.0.0.1');
 
 --
 -- Indexes for dumped tables
@@ -203,6 +430,12 @@ ALTER TABLE `ar_internal_metadata`
 --
 ALTER TABLE `dosens`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inbox`
+--
+ALTER TABLE `inbox`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `mahasiswas`
@@ -223,10 +456,52 @@ ALTER TABLE `nilais`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `outbox`
+--
+ALTER TABLE `outbox`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `outbox_date` (`SendingDateTime`,`SendingTimeOut`),
+  ADD KEY `outbox_sender` (`SenderID`);
+
+--
+-- Indexes for table `outbox_multipart`
+--
+ALTER TABLE `outbox_multipart`
+  ADD PRIMARY KEY (`ID`,`SequencePosition`);
+
+--
+-- Indexes for table `pbk`
+--
+ALTER TABLE `pbk`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `pbk_groups`
+--
+ALTER TABLE `pbk_groups`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `phones`
+--
+ALTER TABLE `phones`
+  ADD PRIMARY KEY (`IMEI`);
+
+--
 -- Indexes for table `schema_migrations`
 --
 ALTER TABLE `schema_migrations`
   ADD PRIMARY KEY (`version`);
+
+--
+-- Indexes for table `sentitems`
+--
+ALTER TABLE `sentitems`
+  ADD PRIMARY KEY (`ID`,`SequencePosition`),
+  ADD KEY `sentitems_date` (`DeliveryDateTime`),
+  ADD KEY `sentitems_tpmr` (`TPMR`),
+  ADD KEY `sentitems_dest` (`DestinationNumber`),
+  ADD KEY `sentitems_sender` (`SenderID`);
 
 --
 -- Indexes for table `users`
@@ -246,10 +521,15 @@ ALTER TABLE `users`
 ALTER TABLE `dosens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `inbox`
+--
+ALTER TABLE `inbox`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `mahasiswas`
 --
 ALTER TABLE `mahasiswas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mata_pelajarans`
 --
@@ -261,10 +541,25 @@ ALTER TABLE `mata_pelajarans`
 ALTER TABLE `nilais`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `outbox`
+--
+ALTER TABLE `outbox`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pbk`
+--
+ALTER TABLE `pbk`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pbk_groups`
+--
+ALTER TABLE `pbk_groups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
