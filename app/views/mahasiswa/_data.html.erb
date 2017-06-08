@@ -2,6 +2,7 @@
     <th>Nama</th>
     <th>NIM</th>
     <th>Tanggal dan Tempat Lahir</th>
+    <th>Telepon Orang Tua/Wali</th>
     <th>Action</th>
 </tr>
 
@@ -10,6 +11,7 @@
     <td><%= data.name %></td>
     <td><%= data.nim %></td>
     <td><%= " #{data.place_birth} #{data.date_birth}" %></td>
+    <td><%= data.parent_phone %></td>
     <td>
         <%= link_to raw('<i class="fa fa-search"></i> Show'), mahasiswa_path(data), class: "btn btn-box-tool btn-default" %>
         <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_mahasiswa_path(data), class: "btn btn-box-tool btn-default" %>

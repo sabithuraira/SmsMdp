@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531021659) do
+ActiveRecord::Schema.define(version: 20170607133709) do
+
+  create_table "daemons", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.text "Start", limit: 65535, null: false
+    t.text "Info",  limit: 65535, null: false
+  end
 
   create_table "dosens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -21,13 +26,32 @@ ActiveRecord::Schema.define(version: 20170531021659) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "gammu", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.integer "Version", default: 0, null: false
+  end
+
+  create_table "inbox", primary_key: "ID", unsigned: true, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.datetime "UpdatedInDB",                     default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "ReceivingDateTime",                                                    null: false
+    t.text     "Text",              limit: 65535,                                      null: false
+    t.string   "SenderNumber",      limit: 20,    default: "",                         null: false
+    t.string   "Coding",            limit: 22,    default: "Default_No_Compression",   null: false
+    t.text     "UDH",               limit: 65535,                                      null: false
+    t.string   "SMSCNumber",        limit: 20,    default: "",                         null: false
+    t.integer  "Class",                           default: -1,                         null: false
+    t.text     "TextDecoded",       limit: 65535,                                      null: false
+    t.text     "RecipientID",       limit: 65535,                                      null: false
+    t.string   "Processed",         limit: 5,     default: "false",                    null: false
+  end
+
   create_table "mahasiswas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "nim"
     t.date     "date_birth"
     t.string   "place_birth"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "parent_phone", null: false
   end
 
   create_table "mata_pelajarans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -45,6 +69,88 @@ ActiveRecord::Schema.define(version: 20170531021659) do
     t.decimal  "nilai",        precision: 64, scale: 12
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "outbox", primary_key: "ID", unsigned: true, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.datetime "UpdatedInDB",                     default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "InsertIntoDB",                                                         null: false
+    t.datetime "SendingDateTime",                                                      null: false
+    t.time     "SendBefore",                      default: '2000-01-01 23:59:59',      null: false
+    t.time     "SendAfter",                       default: '2000-01-01 00:00:00',      null: false
+    t.text     "Text",              limit: 65535
+    t.string   "DestinationNumber", limit: 20,    default: "",                         null: false
+    t.string   "Coding",            limit: 22,    default: "Default_No_Compression",   null: false
+    t.text     "UDH",               limit: 65535
+    t.integer  "Class",                           default: -1
+    t.text     "TextDecoded",       limit: 65535,                                      null: false
+    t.string   "MultiPart",         limit: 5,     default: "false"
+    t.integer  "RelativeValidity",                default: -1
+    t.string   "SenderID"
+    t.datetime "SendingTimeOut"
+    t.string   "DeliveryReport",    limit: 7,     default: "default"
+    t.text     "CreatorID",         limit: 65535,                                      null: false
+    t.index ["SenderID"], name: "outbox_sender", using: :btree
+    t.index ["SendingDateTime", "SendingTimeOut"], name: "outbox_date", using: :btree
+  end
+
+  create_table "outbox_multipart", primary_key: ["ID", "SequencePosition"], force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.text    "Text",             limit: 65535
+    t.string  "Coding",           limit: 22,    default: "Default_No_Compression", null: false
+    t.text    "UDH",              limit: 65535
+    t.integer "Class",                          default: -1
+    t.text    "TextDecoded",      limit: 65535
+    t.integer "ID",                             default: 0,                        null: false, unsigned: true
+    t.integer "SequencePosition",               default: 1,                        null: false
+  end
+
+  create_table "pbk", primary_key: "ID", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.integer "GroupID",               default: -1, null: false
+    t.text    "Name",    limit: 65535,              null: false
+    t.text    "Number",  limit: 65535,              null: false
+  end
+
+  create_table "pbk_groups", primary_key: "ID", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.text "Name", limit: 65535, null: false
+  end
+
+  create_table "phones", primary_key: "IMEI", id: :string, limit: 35, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.text     "ID",           limit: 65535,                                      null: false
+    t.datetime "UpdatedInDB",                default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "InsertIntoDB",                                                    null: false
+    t.datetime "TimeOut",                                                         null: false
+    t.string   "Send",         limit: 3,     default: "no",                       null: false
+    t.string   "Receive",      limit: 3,     default: "no",                       null: false
+    t.text     "Client",       limit: 65535,                                      null: false
+    t.integer  "Battery",                    default: -1,                         null: false
+    t.integer  "Signal",                     default: -1,                         null: false
+    t.integer  "Sent",                       default: 0,                          null: false
+    t.integer  "Received",                   default: 0,                          null: false
+  end
+
+  create_table "sentitems", primary_key: ["ID", "SequencePosition"], force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    t.datetime "UpdatedInDB",                     default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "InsertIntoDB",                                                         null: false
+    t.datetime "SendingDateTime",                                                      null: false
+    t.datetime "DeliveryDateTime"
+    t.text     "Text",              limit: 65535,                                      null: false
+    t.string   "DestinationNumber", limit: 20,    default: "",                         null: false
+    t.string   "Coding",            limit: 22,    default: "Default_No_Compression",   null: false
+    t.text     "UDH",               limit: 65535,                                      null: false
+    t.string   "SMSCNumber",        limit: 20,    default: "",                         null: false
+    t.integer  "Class",                           default: -1,                         null: false
+    t.text     "TextDecoded",       limit: 65535,                                      null: false
+    t.integer  "ID",                              default: 0,                          null: false, unsigned: true
+    t.string   "SenderID",                                                             null: false
+    t.integer  "SequencePosition",                default: 1,                          null: false
+    t.string   "Status",            limit: 17,    default: "SendingOK",                null: false
+    t.integer  "StatusError",                     default: -1,                         null: false
+    t.integer  "TPMR",                            default: -1,                         null: false
+    t.integer  "RelativeValidity",                default: -1,                         null: false
+    t.text     "CreatorID",         limit: 65535,                                      null: false
+    t.index ["DeliveryDateTime"], name: "sentitems_date", using: :btree
+    t.index ["DestinationNumber"], name: "sentitems_dest", using: :btree
+    t.index ["SenderID"], name: "sentitems_sender", using: :btree
+    t.index ["TPMR"], name: "sentitems_tpmr", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

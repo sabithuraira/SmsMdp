@@ -53,6 +53,6 @@ class MahasiswaController < ApplicationController
 
     private
     def mahasiswa_params
-        params.require(:mahasiswa).permit(:name,:nim,:date_birth,:place_birth, :text)
+        params.require(:mahasiswa).permit(:name,:nim,:date_birth,:place_birth,:parent_phone, :text)
     end
 end

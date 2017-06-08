@@ -1,4 +1,3 @@
-
 $("#form_index").submit(function(){
     var search_str=$('#table_search').val();
     $.ajax({

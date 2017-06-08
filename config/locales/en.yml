@@ -40,6 +40,7 @@ en:
         nim: NIM
         date_birth: Tanggal Lahir
         place_birth: Tempat Lahir
+        parent_phone: Telepon orang tua/wali
       user:
         name: Nama
         password_confirmation: Konfirmasi Password

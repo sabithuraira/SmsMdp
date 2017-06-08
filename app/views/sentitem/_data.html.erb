@@ -1,0 +1,11 @@
+<tr>
+    <th>Text</th>
+    <th>Nomor Tujuan</th>
+</tr>
+
+<% @datas.each do |data| %>
+<tr>
+    <td><%= data.Text %></td>
+    <td><%= data.DestinationNumber %></td>
+</tr>
+<% end %>
