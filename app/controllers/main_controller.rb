@@ -20,6 +20,7 @@ class MainController < ApplicationController
 
     def create
         @data = Nilai.new(nilai_params)
+        @data.dosen = current_user.id
 
         if @data.save
             redirect_to @data
@@ -34,6 +35,7 @@ class MainController < ApplicationController
 
     def update
         @data = Nilai.find(params[:id])
+        @data = current_user.id
         
         if @data.update(nilai_params)
             redirect_to @data

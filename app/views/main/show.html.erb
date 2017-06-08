@@ -15,11 +15,11 @@
     <!-- Add the bg color to the header using any of the bg-* classes -->
     <div class="widget-user-header">
         <!-- /.widget-user-image -->
-        <h3 class="widget-user-username"><%= @data.mahasiswa.name %></h3>
-        <h5 class="widget-user-desc"><%= @data.mata_pelajaran.name %></h5>
+        <h3 class="widget-user-username"><%= @data.mahasiswa_rel.name %></h3>
+        <h5 class="widget-user-desc"><%= @data.mata_pelajaran_rel.name %></h5>
         <h5 class="widget-user-desc">Semester <%= @data.semester %></h5>
         <h5 class="widget-user-desc">Tahun Ajaran <%= @data.tahun_ajaran %></h5>
-        <h5 class="widget-user-desc"><%= @data.dosen.nil? ? "" : @data.dosen.name %></h5>
+        <h5 class="widget-user-desc"><%= @data.dosen.nil? ? "" : @data.dosen_rel.name %></h5>
         <h5 class="widget-user-desc"><%= @data.nilai %></h5>
     </div>
     <div class="box-footer no-padding">

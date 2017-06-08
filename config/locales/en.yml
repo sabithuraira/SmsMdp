@@ -21,13 +21,13 @@
 
 en:
   title: 
-    header: PKN STAN
+    header: SMS STMIK MDP
     logomini:
-      b1: PKN
-      b2: STAN
+      b1: STMIK
+      b2: MDP
     logolg:
-      b1: PKN
-      b2: STAN
+      b1: STMIK
+      b2: MDP
   navigation:
     header: MENU UTAMA
   hello: "Hello world"
