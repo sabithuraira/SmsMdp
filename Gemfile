@@ -12,7 +12,7 @@ gem 'rails', '~> 5.0.1'
 gem 'sqlite3'
 # Use Puma as the app server
 gem 'mysql2'
-#gem 'bcrypt'
+gem 'bcrypt'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'

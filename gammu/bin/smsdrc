@@ -62,7 +62,7 @@ user = root
 password = 
 pc = MysqlUnicode
 # pc can also contain port or socket path after colon (eg. localhost:/path/to/socket)
-database = gammu
+database = smsmdp
 
 # DBI configuration
 driver = odbc
