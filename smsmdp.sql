@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2017 at 02:58 PM
+-- Generation Time: Jun 11, 2017 at 10:49 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -130,17 +130,18 @@ CREATE TABLE `mahasiswas` (
   `date_birth` date DEFAULT NULL,
   `place_birth` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
+  `updated_at` datetime NOT NULL,
+  `parent_phone` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `mahasiswas`
 --
 
-INSERT INTO `mahasiswas` (`id`, `name`, `nim`, `date_birth`, `place_birth`, `created_at`, `updated_at`) VALUES
-(1, 'Abidzar Ghifari', NULL, NULL, NULL, '2017-05-27 15:09:40', '2017-05-27 15:09:40'),
-(2, 'Zea Shakira Sabit', '1000002', '2016-09-25', 'Palembang', '2017-05-27 15:29:20', '2017-05-27 15:29:20'),
-(3, 'Abdul', '8990', '2012-08-08', 'kjkj', '2017-06-03 03:47:26', '2017-06-03 03:47:43');
+INSERT INTO `mahasiswas` (`id`, `name`, `nim`, `date_birth`, `place_birth`, `created_at`, `updated_at`, `parent_phone`) VALUES
+(1, 'Abidzar Ghifari', '', NULL, '', '2017-05-27 15:09:40', '2017-06-08 02:34:09', '+6281373028055'),
+(2, 'Zea Shakira Sabit', '1000002', '2016-09-25', 'Palembang', '2017-05-27 15:29:20', '2017-06-07 13:47:22', '+628999826256'),
+(3, 'Abdul', '8990', '2012-08-08', 'kjkj', '2017-06-03 03:47:26', '2017-06-08 02:33:52', '+628131234567');
 
 -- --------------------------------------------------------
 
@@ -187,7 +188,9 @@ CREATE TABLE `nilais` (
 --
 
 INSERT INTO `nilais` (`id`, `dosen`, `mp`, `mahasiswa`, `tahun_ajaran`, `semester`, `nilai`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, '1', '2016/2017', 1, '74.500000000000', '2017-05-28 03:14:28', '2017-05-28 03:14:28');
+(1, NULL, 1, '1', '2016/2017', 1, '74.500000000000', '2017-05-28 03:14:28', '2017-05-28 03:14:28'),
+(6, 4, 8, '3', '2016/2017', 1, '51.000000000000', '2017-06-08 02:34:28', '2017-06-08 02:34:28'),
+(7, 4, 1, '2', '2016/2017', 1, '100.000000000000', '2017-06-08 02:34:47', '2017-06-08 02:34:47');
 
 -- --------------------------------------------------------
 
@@ -215,6 +218,13 @@ CREATE TABLE `outbox` (
   `DeliveryReport` enum('default','yes','no') DEFAULT 'default',
   `CreatorID` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `outbox`
+--
+
+INSERT INTO `outbox` (`UpdatedInDB`, `InsertIntoDB`, `SendingDateTime`, `SendBefore`, `SendAfter`, `Text`, `DestinationNumber`, `Coding`, `UDH`, `Class`, `TextDecoded`, `ID`, `MultiPart`, `RelativeValidity`, `SenderID`, `SendingTimeOut`, `DeliveryReport`, `CreatorID`) VALUES
+('2017-06-08 02:34:28', '2017-06-08 02:34:28', '2017-06-08 02:34:28', '23:59:59', '00:00:00', NULL, '+628131234567', 'Default_No_Compression', NULL, -1, 'Salam, pengumuman nilai dari Abdul matkul Dasar Pemrograman 51.0. Terima kasih', 2, 'false', -1, NULL, '2017-06-08 02:34:28', 'default', 'Gammu');
 
 --
 -- Triggers `outbox`
@@ -335,7 +345,8 @@ INSERT INTO `schema_migrations` (`version`) VALUES
 ('20170528133342'),
 ('20170528133631'),
 ('20170528165619'),
-('20170531021659');
+('20170531021659'),
+('20170607133709');
 
 -- --------------------------------------------------------
 
@@ -412,8 +423,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `password`, `date_birth`, `place_birth`, `created_at`, `updated_at`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`) VALUES
 (2, NULL, NULL, NULL, NULL, '2017-05-31 05:36:47', '2017-05-31 05:36:47', 'fithri.selva@gmail.com', '$2a$11$flaJjtfjDYPq1w08HBkQmeBP3ny43M00DQezCin0ef/taPdUJDs3C', NULL, NULL, NULL, 1, '2017-05-31 05:36:47', '2017-05-31 05:36:47', '127.0.0.1', '127.0.0.1'),
-(3, 'Farifam Store', NULL, NULL, NULL, '2017-06-03 17:38:48', '2017-06-03 17:39:21', 'farifamstore2nd@gmail.com', '$2a$11$XRb/GP6GTQBaqS9oHVHehO.3oD6TBDB8pviVFlZ7PMMFUwAYRdYN.', NULL, NULL, NULL, 2, '2017-06-03 17:39:21', '2017-06-03 17:38:48', '127.0.0.1', '127.0.0.1'),
-(4, 'Sabit Huraira', NULL, NULL, NULL, '2017-06-03 19:50:18', '2017-06-03 19:50:38', 'sabitzhabit@gmail.com', '$2a$11$n.Rce04oK1pi.WqXDHXamu8fY.M0A/LE08EscBU45lxYhYhvXmldC', NULL, NULL, NULL, 2, '2017-06-03 19:50:38', '2017-06-03 19:50:18', '127.0.0.1', '127.0.0.1');
+(3, 'Farifam Store', NULL, NULL, NULL, '2017-06-03 17:38:48', '2017-06-07 13:08:32', 'farifamstore2nd@gmail.com', '$2a$11$XRb/GP6GTQBaqS9oHVHehO.3oD6TBDB8pviVFlZ7PMMFUwAYRdYN.', NULL, NULL, NULL, 4, '2017-06-07 13:08:32', '2017-06-04 14:03:29', '127.0.0.1', '127.0.0.1'),
+(4, 'Sabit Huraira', NULL, NULL, NULL, '2017-06-03 19:50:18', '2017-06-08 02:11:31', 'sabitzhabit@gmail.com', '$2a$11$n.Rce04oK1pi.WqXDHXamu8fY.M0A/LE08EscBU45lxYhYhvXmldC', NULL, NULL, NULL, 4, '2017-06-08 02:11:31', '2017-06-08 01:17:50', '127.0.0.1', '127.0.0.1');
 
 --
 -- Indexes for dumped tables
@@ -539,12 +550,12 @@ ALTER TABLE `mata_pelajarans`
 -- AUTO_INCREMENT for table `nilais`
 --
 ALTER TABLE `nilais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `outbox`
 --
 ALTER TABLE `outbox`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pbk`
 --

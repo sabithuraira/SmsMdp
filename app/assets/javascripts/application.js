@@ -20,3 +20,4 @@
 //= require admin-lte/plugins/slimScroll/jquery.slimscroll.min.js
 //= require admin-lte/dist/js/demo.js
 //= require admin-lte/plugins/datepicker/bootstrap-datepicker.js
+//= require themes.js
