@@ -12,6 +12,10 @@ class MahasiswaController < ApplicationController
         render :partial => 'data'
     end
 
+    def absen
+        
+    end
+
     def new
         @data=Mahasiswa.new
     end

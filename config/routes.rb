@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :main,:as => "nilais" 
   resources :mp , :as => "mata_pelajarans"
-  resources :mahasiswa , :as => "mahasiswas"
+  resources :mahasiswa , :as => "mahasiswas" do  
+   get 'absen', on: :collection   
+  end
   resources :user , :as => "users"
   #get '/login', to: 'main#login'
   #post '/login', to: 'main#signin'
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   get '/sentitem', to: 'sentitem#index'
   post '/mp/search', to: 'mp#search'
   post '/mahasiswa/search', to: 'mahasiswa#search'
+  # get '/mahasiswa/absen/', to: 'mahasiswa#absen'
   post '/user/search', to: 'user#search'
   post '/main/search', to: 'main#search'
 
