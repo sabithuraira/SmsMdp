@@ -2,11 +2,11 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Daftar Mata Kuliah</h3>
+        <h3 class="box-title">Daftar Dosen</h3>
         
-        <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_mata_pelajaran_path, class: "btn btn-box-tool btn-default" %> 
+        <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_dosen_path, class: "btn btn-box-tool btn-default" %> 
         <div class="box-tools">
-          <%= form_tag({controller: "mp", action: "search"}, method: "post", id: "form_index") do %>
+          <%= form_tag({controller: "dosen", action: "search"}, method: "post", id: "form_index") do %>
             <div class="input-group input-group-sm" style="width: 150px;">
               <input type="text" id="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -22,16 +22,18 @@
         <table class="table table-hover" id="table_data">
           <tr>
             <th>Nama</th>
+            <th>NIM</th>
             <th>Action</th>
           </tr>
 
           <% @datas.each do |data| %>
             <tr>
             <td><%= data.name %></td>
+            <td><%= data.nim %></td>
             <td>
-                <%= link_to raw('<i class="fa fa-search"></i> Show'), mata_pelajaran_path(data), class: "btn btn-box-tool btn-default" %>
-                <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_mata_pelajaran_path(data), class: "btn btn-box-tool btn-default" %>
-                <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), mata_pelajaran_path(data), class: "btn btn-box-tool btn-default" , 
+                <%= link_to raw('<i class="fa fa-search"></i> Show'), dosen_path(data), class: "btn btn-box-tool btn-default" %>
+                <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_dosen_path(data), class: "btn btn-box-tool btn-default" %>
+                <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), dosen_path(data), class: "btn btn-box-tool btn-default" , 
                     method: :delete,
                     data: { confirm: 'Are you sure?' } %>
             </td>

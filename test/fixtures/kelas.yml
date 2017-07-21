@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dosen_id: 1
+  mata_pelajaran_id: 1
+  tahun_ajaran: MyString
+  nama: MyString
+  created_by: 1
+  updated_by: 1
+
+two:
+  dosen_id: 1
+  mata_pelajaran_id: 1
+  tahun_ajaran: MyString
+  nama: MyString
+  created_by: 1
+  updated_by: 1

@@ -16,10 +16,12 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header"><%= t('navigation.header') %></li>
+
+        
         <li class="active treeview">
           <%= link_to raw('<i class="fa fa-dashboard"></i> Dashboard'), nilais_path %>
         </li>
-          
+        <!--
         <li class="treeview">
           <%= link_to raw('<i class="fa fa-share-square-o"></i> Outbox'), outbox_path %>
         </li>
@@ -31,11 +33,23 @@
         <li class="treeview">
           <%= link_to raw('<i class="fa fa-group"></i> Mahasiswa'), mahasiswas_path %>
         </li>
+        -->
+        <li class="treeview">
+          <%= link_to raw('<i class="fa fa-newspaper-o"></i> Berita'), mata_pelajarans_path %>
+        </li>
 
         <li class="treeview">
           <%= link_to raw('<i class="fa fa-table"></i> Absensi'), mata_pelajarans_path %>
         </li>
 
+        <li class="treeview">
+          <%= link_to raw('<i class="fa fa-list"></i> Nilai Kelas'), mata_pelajarans_path %>
+        </li>
+
+        <li class="treeview">
+          <%= link_to raw('<i class="fa fa-graduation-cap"></i> IPK'), mata_pelajarans_path %>
+        </li>
+        <!--
         <li class="treeview">
           <%= link_to raw('<i class="fa fa-list"></i> Mata Pelajaran'), mata_pelajarans_path %>
         </li>
@@ -43,6 +57,7 @@
         <li class="treeview">
           <%= link_to raw('<i class="fa fa-child"></i> User'), users_path %>
         </li>
+        -->
 
         <li class="treeview">
           <%= link_to raw('<i class="fa fa-sign-out"></i> Sign Out'), destroy_user_session_path, method: :delete %>

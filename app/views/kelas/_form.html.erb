@@ -1,0 +1,48 @@
+<%= form_for(kela) do |f| %>
+  <div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+              <% if kela.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(kela.errors.count, "error") %> prohibited this kela from being saved:</h2>
+
+                  <ul>
+                  <% kela.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="form-group">
+              <label>Dosen</label>
+              <%= f.collection_select :dosen_id, Dosen.all, :id, :name, {:prompt=>"Pilih Dosen"}, {:class=>"form-control"} %>
+            </div>
+
+            <div class="form-group">
+              <label>Mata Kuliah</label>
+              <%= f.collection_select :mata_pelajaran_id, MataPelajaran.all, :id, :name, {:prompt=>"Pilih Mata Pelajaran"}, {:class=>"form-control"} %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :tahun_ajaran %>
+                <%= f.text_field :tahun_ajaran, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :nama %>
+                <%= f.text_field :nama, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="box-footer">
+        <!--<button type="submit" class="btn btn-default">Cancel</button>-->
+        <button type="submit" class="btn btn-info pull-right">Submit</button>
+    </div>
+
+<% end %>

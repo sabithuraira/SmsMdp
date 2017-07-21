@@ -2,23 +2,35 @@
 <%= form_for @data do |f| %>
 <div class="box-body">
     <div class="row">
-    <!-- /.col -->
-    <div class="col-md-12">
+        <div class="col-md-12">
 
-        <div class="form-group">
-        <%= f.label :name %>
-        <!--<label>Nama Mata Pelajaran</label>-->
-        <%= f.text_field :name, class: "form-control", placeholder: "Masukkan Nilai" %>
-        <!--<input type="text" class="form-control"  placeholder="Masukkan Nilai">-->
+            <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control", placeholder: "Nama Dosen" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :nim %>
+                <%= f.text_field :nim, class: "form-control", placeholder: "NIM Dosen" %>
+            </div>
+            
+            <div class="form-group">
+                <%= f.label :date_birth %>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <%= f.text_field :date_birth, class: "form-control pull-right" %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :place_birth %>
+                <%= f.text_field :place_birth, class: "form-control" %>
+            </div>
         </div>
-        <!-- /.form-group -->
     </div>
-    <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
 </div>
-<!-- /.box-body -->
 
 <div class="box-footer">
 <!--<button type="submit" class="btn btn-default">Cancel</button>-->
