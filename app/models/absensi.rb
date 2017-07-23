@@ -1,0 +1,2 @@
+class Absensi < ApplicationRecord
+end

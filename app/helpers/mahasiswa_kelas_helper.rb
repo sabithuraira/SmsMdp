@@ -1,0 +1,2 @@
+module MahasiswaKelasHelper
+end

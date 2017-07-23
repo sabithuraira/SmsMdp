@@ -1,0 +1,2 @@
+class MahasiswaKela < ApplicationRecord
+end

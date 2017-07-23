@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mahasiswa_id: 1
+  kelas_id: 1
+  created_by: 1
+  updated_by: 1
+
+two:
+  mahasiswa_id: 1
+  kelas_id: 1
+  created_by: 1
+  updated_by: 1

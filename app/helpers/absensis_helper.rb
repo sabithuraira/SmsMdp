@@ -1,0 +1,2 @@
+module AbsensisHelper
+end

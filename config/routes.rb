@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :absensis
+  resources :mahasiswa_kelas
   resources :kelas
   devise_for :users, 
       controllers: { omniauth_callbacks: 'omniauth_callbacks' },

@@ -1,0 +1,52 @@
+<%= form_for(absensi) do |f| %>
+  <% if absensi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(absensi.errors.count, "error") %> prohibited this absensi from being saved:</h2>
+
+      <ul>
+      <% absensi.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mahasiswa_id %>
+    <%= f.number_field :mahasiswa_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :kelas_id %>
+    <%= f.number_field :kelas_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pertemuan_ke %>
+    <%= f.number_field :pertemuan_ke %>
+  </div>
+
+  <div class="field">
+    <%= f.label :flag %>
+    <%= f.number_field :flag %>
+  </div>
+
+  <div class="field">
+    <%= f.label :keterangan %>
+    <%= f.text_field :keterangan %>
+  </div>
+
+  <div class="field">
+    <%= f.label :created_by %>
+    <%= f.number_field :created_by %>
+  </div>
+
+  <div class="field">
+    <%= f.label :updated_by %>
+    <%= f.number_field :updated_by %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

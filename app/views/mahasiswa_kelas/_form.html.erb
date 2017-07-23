@@ -1,0 +1,37 @@
+<%= form_for(mahasiswa_kela) do |f| %>
+  <% if mahasiswa_kela.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mahasiswa_kela.errors.count, "error") %> prohibited this mahasiswa_kela from being saved:</h2>
+
+      <ul>
+      <% mahasiswa_kela.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mahasiswa_id %>
+    <%= f.number_field :mahasiswa_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :kelas_id %>
+    <%= f.number_field :kelas_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :created_by %>
+    <%= f.number_field :created_by %>
+  </div>
+
+  <div class="field">
+    <%= f.label :updated_by %>
+    <%= f.number_field :updated_by %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

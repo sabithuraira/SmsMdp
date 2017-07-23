@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mahasiswa:</strong>
+  <%= @absensi.mahasiswa_id %>
+</p>
+
+<p>
+  <strong>Kelas:</strong>
+  <%= @absensi.kelas_id %>
+</p>
+
+<p>
+  <strong>Pertemuan ke:</strong>
+  <%= @absensi.pertemuan_ke %>
+</p>
+
+<p>
+  <strong>Flag:</strong>
+  <%= @absensi.flag %>
+</p>
+
+<p>
+  <strong>Keterangan:</strong>
+  <%= @absensi.keterangan %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @absensi.created_by %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @absensi.updated_by %>
+</p>
+
+<%= link_to 'Edit', edit_absensi_path(@absensi) %> |
+<%= link_to 'Back', absensis_path %>

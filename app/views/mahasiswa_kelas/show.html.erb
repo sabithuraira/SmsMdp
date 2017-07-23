@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mahasiswa:</strong>
+  <%= @mahasiswa_kela.mahasiswa_id %>
+</p>
+
+<p>
+  <strong>Kelas:</strong>
+  <%= @mahasiswa_kela.kelas_id %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @mahasiswa_kela.created_by %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @mahasiswa_kela.updated_by %>
+</p>
+
+<%= link_to 'Edit', edit_mahasiswa_kela_path(@mahasiswa_kela) %> |
+<%= link_to 'Back', mahasiswa_kelas_path %>

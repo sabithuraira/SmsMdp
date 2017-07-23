@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Absensis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mahasiswa</th>
+      <th>Kelas</th>
+      <th>Pertemuan ke</th>
+      <th>Flag</th>
+      <th>Keterangan</th>
+      <th>Created by</th>
+      <th>Updated by</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @absensis.each do |absensi| %>
+      <tr>
+        <td><%= absensi.mahasiswa_id %></td>
+        <td><%= absensi.kelas_id %></td>
+        <td><%= absensi.pertemuan_ke %></td>
+        <td><%= absensi.flag %></td>
+        <td><%= absensi.keterangan %></td>
+        <td><%= absensi.created_by %></td>
+        <td><%= absensi.updated_by %></td>
+        <td><%= link_to 'Show', absensi %></td>
+        <td><%= link_to 'Edit', edit_absensi_path(absensi) %></td>
+        <td><%= link_to 'Destroy', absensi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Absensi', new_absensi_path %>

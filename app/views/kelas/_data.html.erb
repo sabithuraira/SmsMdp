@@ -3,19 +3,16 @@
     <th>Mata pelajaran</th>
     <th>Tahun ajaran</th>
     <th>Nama</th>
-    <th>Created by</th>
-    <th>Updated by</th>
     <th colspan="3"></th>
 </tr>
 
+
 <% @kelas.each do |kela| %>
     <tr>
-        <td><%= kela.dosen_id %></td>
-        <td><%= kela.mata_pelajaran_id %></td>
+        <td><%= kela.dosen_rel.name %></td>
+        <td><%= kela.mata_pelajaran_rel.name %></td>
         <td><%= kela.tahun_ajaran %></td>
         <td><%= kela.nama %></td>
-        <td><%= kela.created_by %></td>
-        <td><%= kela.updated_by %></td>
         <td><%= link_to 'Show', kela %></td>
         <td><%= link_to 'Edit', edit_kela_path(kela) %></td>
         <td><%= link_to 'Destroy', kela, method: :delete, data: { confirm: 'Are you sure?' } %></td>
