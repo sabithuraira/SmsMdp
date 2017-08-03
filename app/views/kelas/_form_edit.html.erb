@@ -1,0 +1,110 @@
+<div id="form_app">
+<%= form_for(kela) do |f| %>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                <% if kela.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(kela.errors.count, "error") %> prohibited this kela from being saved:</h2>
+
+                        <ul>
+                        <% kela.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+                </div>
+
+                <div class="form-group">
+                <label>Dosen</label>
+                <input type="hidden" id="kelas_id" value="<%= kela.id %>">
+                <%= f.collection_select :dosen_id, Dosen.all, :id, :name, {:prompt=>"Pilih Dosen"}, {:class=>"form-control"} %>
+                </div>
+
+                <div class="form-group">
+                <label>Mata Kuliah</label>
+                <%= f.collection_select :mata_pelajaran_id, MataPelajaran.all, :id, :name, {:prompt=>"Pilih Mata Pelajaran"}, {:class=>"form-control"} %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :tahun_ajaran %>
+                    <%= f.text_field :tahun_ajaran, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :nama %>
+                    <%= f.text_field :nama, class: "form-control" %>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Mahasiswa pada kelas ini</h3>
+                        <button type="button" class="btn btn-default btn-box-tool pull-right" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-plus"></i> Tambah mahasiswa pada kelas ini
+                        </button>
+                    </div>
+        
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover" id="table_data">
+                            <tr>
+                                <th>Name</th>
+                                <th>NIM</th>
+                                <th></th>
+                            </tr>
+                            <tr v-for="row in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                                <td>{{ row.mahasiswa_rel.name }}</td>
+                                <td>{{ row.mahasiswa_rel.nim }}</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Daftar Mahasiswa</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover" id="mahasiswa_data">
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>NIM</th>
+                            <th></th>
+                        </tr>
+                        <tr v-for="row in datas" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                            <td><input :id="'check'+row.id" :value="row.id" type="checkbox"  v-model="check_data" /></td>
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.nim }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-btn">Save changes</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+
+<%= javascript_include_tag 'kelas'%>

@@ -8,13 +8,29 @@ class KelasController < ApplicationController
   end
 
   def search
-      @kelas = Kela.all
-      if params[:search]
-          @kelas = Kela.search(params[:search])
-      end
-
-      render :partial => 'data'
+    @kelas = Kela.all
+    if params[:search]
+        @kelas = Kela.search(params[:search])
     end
+
+    render :partial => 'data'
+  end
+
+  def subsetmahasiswa
+    @subset =  Mahasiswa.all
+    
+    respond_to do |format|
+        format.json { render json: @subset}
+    end
+  end
+
+  def mahasiswa_rel
+    @datas = MahasiswaKela.by_kelas(params[:id])
+    
+    respond_to do |format|
+        format.json { render json: @datas}
+    end
+  end
 
   # GET /kelas/1
   # GET /kelas/1.json
@@ -52,9 +68,11 @@ class KelasController < ApplicationController
   # PATCH/PUT /kelas/1.json
   def update
     @kela.updated_by = current_user.id
+    @list_mahasiswa = MahasiswaKela.by_kelas(@kela.id)
+
     respond_to do |format|
       if @kela.update(kela_params)
-        format.html { redirect_to @kela, notice: 'Kela was successfully updated.' }
+        format.html { redirect_to @kela, notice: 'Kelas was successfully updated.' }
         format.json { render :show, status: :ok, location: @kela }
       else
         format.html { render :edit }

@@ -1,6 +1,9 @@
-<h1>Editing Kela</h1>
+<h1>Editing Kelas</h1>
 
-<%= render 'form', kela: @kela %>
+<%= render 'form_edit', 
+    kela: @kela, 
+    list_mahasiswa: @list_mahasiswa
+%>
 
 <%= link_to 'Show', @kela %> |
 <%= link_to 'Back', kelas_path %>

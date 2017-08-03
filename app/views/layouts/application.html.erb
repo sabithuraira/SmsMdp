@@ -6,6 +6,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="turbolinks-cache-control" content="no-cache">
   </head>
 
@@ -41,7 +42,6 @@
   <%= render "layouts/footer" %>
   <%= render "layouts/sidebar" %>
 </div>
-<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   
 </body>
 </html>

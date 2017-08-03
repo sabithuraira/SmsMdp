@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721015124) do
+ActiveRecord::Schema.define(version: 20170723143631) do
+
+  create_table "absensis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "mahasiswa_id"
+    t.integer  "kelas_id"
+    t.integer  "pertemuan_ke"
+    t.integer  "flag"
+    t.string   "keterangan"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "daemons", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.text "Start", limit: 65535, null: false
@@ -45,14 +57,23 @@ ActiveRecord::Schema.define(version: 20170721015124) do
   end
 
   create_table "kelas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "dosen_id"
-    t.integer  "mata_pelajaran_id"
-    t.string   "tahun_ajaran"
-    t.string   "nama"
-    t.integer  "created_by"
-    t.integer  "updated_by"
+    t.integer  "dosen_id",          null: false
+    t.integer  "mata_pelajaran_id", null: false
+    t.string   "tahun_ajaran",      null: false
+    t.string   "nama",              null: false
+    t.integer  "created_by",        null: false
+    t.integer  "updated_by",        null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "mahasiswa_kelas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "mahasiswa_id"
+    t.integer  "kelas_id"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "mahasiswas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

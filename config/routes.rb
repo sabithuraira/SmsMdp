@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :absensis
   resources :mahasiswa_kelas
-  resources :kelas
   devise_for :users, 
       controllers: { omniauth_callbacks: 'omniauth_callbacks' },
       path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register', edit: 'settings' }
@@ -27,6 +26,9 @@ Rails.application.routes.draw do
 
   post '/outbox/search', to: 'outbox#search'
   post '/sentitem/search', to: 'sentitem#search'
+  get '/kelas/subsetmahasiswa/:id', to: 'kelas#subsetmahasiswa', :defaults => { :format => 'json' }
+  get '/kelas/mahasiswa_rel/:id', to: 'kelas#mahasiswa_rel', :defaults => { :format => 'json' }
+  resources :kelas, :as => "kelas"
   root 'main#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
