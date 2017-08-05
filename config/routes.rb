@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   post '/sentitem/search', to: 'sentitem#search'
   get '/kelas/subsetmahasiswa/:id', to: 'kelas#subsetmahasiswa', :defaults => { :format => 'json' }
   get '/kelas/mahasiswa_rel/:id', to: 'kelas#mahasiswa_rel', :defaults => { :format => 'json' }
+  post '/kelas/update_mahasiswa/:id', to: 'kelas#update_mahasiswa', :defaults => { :format => 'json' }
+  delete '/kelas/delete_mahasiswa/:id', to: 'kelas#delete_mahasiswa', :defaults => { :format => 'json' }
   resources :kelas, :as => "kelas"
   root 'main#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

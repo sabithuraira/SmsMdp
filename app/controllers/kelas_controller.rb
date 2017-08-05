@@ -28,7 +28,38 @@ class KelasController < ApplicationController
     @datas = MahasiswaKela.by_kelas(params[:id])
     
     respond_to do |format|
-        format.json { render json: @datas}
+        format.json { render json: @datas.to_json(:include => :mahasiswa_rel)}
+    end
+  end
+
+  def update_mahasiswa
+    # @list_mahasiswa = params[:datas];
+
+    @list_data = Array.new
+
+    params[:datas].each do |data|
+      @list_data.push({
+        mahasiswa_id: data,
+        kelas_id: params[:id],
+        created_by: current_user.id,
+        updated_by: current_user.id
+      })
+    end
+
+    respond_to do |format|
+      if MahasiswaKela.create(@list_data)
+        format.json { render json: "success insert data", status: :ok }
+      else
+        format.json { render json: "failed to insert data", status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def delete_mahasiswa
+    @data = MahasiswaKela.find(params[:id])
+    @data.destroy
+    respond_to do |format|
+      format.json { head :no_content }
     end
   end
 
