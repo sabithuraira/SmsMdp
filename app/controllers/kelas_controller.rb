@@ -17,7 +17,7 @@ class KelasController < ApplicationController
   end
 
   def subsetmahasiswa
-    @subset =  Mahasiswa.all
+    @subset =  Mahasiswa.subset(params[:id])
     
     respond_to do |format|
         format.json { render json: @subset}

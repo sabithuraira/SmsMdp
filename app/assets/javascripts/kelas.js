@@ -14,15 +14,7 @@ $(document).ready(function() {
     var id=$("#kelas_id").val();
 
     if(form_app!=null){
-
-        $.getJSON("http://localhost:3000/kelas/subsetmahasiswa/"+id+".json", (response) => { 
-            vm.datas = response;
-        });
-
-
-        $.getJSON("http://localhost:3000/kelas/mahasiswa_rel/"+id+".json", (response) => { 
-            vm.mahasiswa_rel = response;
-        });
+        refresh_list_mahasiswa()
 
         $('#save-btn').on('click', function(e) {
             e.preventDefault();
@@ -38,15 +30,11 @@ $(document).ready(function() {
                     datas: vm.check_data
                 },
                 success: function(data) { 
-                    $.getJSON("http://localhost:3000/kelas/mahasiswa_rel/"+id+".json", (response) => { 
-                        vm.mahasiswa_rel = response;
-                    });
+                    refresh_list_mahasiswa();
                     $('#myModal').modal('hide');
                 }.bind(this),
                 error: function(xhr, status, err) {
-                    $.getJSON("http://localhost:3000/kelas/mahasiswa_rel/"+id+".json", (response) => { 
-                        vm.mahasiswa_rel = response;
-                    });
+                    refresh_list_mahasiswa();
                     $('#myModal').modal('hide');
                 }.bind(this)
             });
@@ -66,6 +54,15 @@ $(document).ready(function() {
             $('#myModalDelete').modal('hide');
         });
 
+        function refresh_list_mahasiswa(){
+            $.getJSON("http://localhost:3000/kelas/subsetmahasiswa/"+id+".json", (response) => { 
+                vm.datas = response;
+            });
+
+            $.getJSON("http://localhost:3000/kelas/mahasiswa_rel/"+id+".json", (response) => { 
+                vm.mahasiswa_rel = response;
+            });
+        }
 
         function delete_data(event){
             var submit_url="http://localhost:3000/kelas/delete_mahasiswa/"+vm.selectedId+".json";
@@ -76,9 +73,7 @@ $(document).ready(function() {
                 type: submit_type,
                 success: function(data) { 
                     vm.selectedId=0;
-                    $.getJSON("http://localhost:3000/kelas/mahasiswa_rel/"+id+".json", (response) => { 
-                        vm.mahasiswa_rel = response;
-                    });
+                    refresh_list_mahasiswa();
                 }.bind(this),
                 error: function(xhr, status, err) {
                     console.log(xhr)

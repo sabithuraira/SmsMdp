@@ -6,4 +6,12 @@ class Mahasiswa < ApplicationRecord
             all
         end
     end
+
+    def self.subset(id)
+        if id
+            where.not(id: MahasiswaKela.where(kelas_id: id).select(:mahasiswa_id))
+        else
+            all
+        end
+    end
 end
