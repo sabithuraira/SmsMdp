@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.1.1'
 Rails.application.config.assets.precompile += %w( vue.js )
 Rails.application.config.assets.precompile += %w( themes.js )
 Rails.application.config.assets.precompile += %w( kelas.js )
+Rails.application.config.assets.precompile += %w( absensi.js )

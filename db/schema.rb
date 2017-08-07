@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170723143631) do
+ActiveRecord::Schema.define(version: 20170807052522) do
 
   create_table "absensis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "mahasiswa_id"
@@ -72,8 +72,40 @@ ActiveRecord::Schema.define(version: 20170723143631) do
     t.integer  "kelas_id"
     t.integer  "created_by"
     t.integer  "updated_by"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "abs1"
+    t.integer  "abs2"
+    t.integer  "abs3"
+    t.integer  "abs4"
+    t.integer  "abs5"
+    t.integer  "abs6"
+    t.integer  "abs7"
+    t.integer  "abs8"
+    t.integer  "abs9"
+    t.integer  "abs10"
+    t.integer  "abs11"
+    t.integer  "abs12"
+    t.integer  "abs13"
+    t.integer  "abs14"
+    t.integer  "abs15"
+    t.integer  "abs16"
+    t.integer  "abs17"
+    t.integer  "abs18"
+    t.integer  "abs19"
+    t.integer  "abs20"
+    t.integer  "abs21"
+    t.integer  "abs22"
+    t.integer  "abs23"
+    t.integer  "abs24"
+    t.integer  "abs25"
+    t.integer  "abs26"
+    t.integer  "abs27"
+    t.integer  "abs28"
+    t.decimal  "quiz",         precision: 64, scale: 12
+    t.decimal  "uts",          precision: 64, scale: 12
+    t.decimal  "uas",          precision: 64, scale: 12
+    t.decimal  "tugas",        precision: 64, scale: 12
   end
 
   create_table "mahasiswas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

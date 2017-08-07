@@ -1,5 +1,5 @@
 class KelasController < ApplicationController
-  before_action :set_kela, only: [:show, :edit, :update, :destroy]
+  before_action :set_kela, only: [:show, :edit, :update, :destroy, :absensi]
 
   # GET /kelas
   # GET /kelas.json
@@ -55,6 +55,24 @@ class KelasController < ApplicationController
     end
   end
 
+  def update_absensi
+    @list_data = Array.new
+
+    params[:datas].each do |data|
+      @cur_date = MahasiswaKela.find_by(kelas_id: params[:id], mahasiswa_id: data.id)
+      # @cur_date.abs1 = data.absen
+      @cur_date.update(abs1: data.absen)
+    end
+
+    respond_to do |format|
+      if MahasiswaKela.create(@list_data)
+        format.json { render json: "success insert data", status: :ok }
+      else
+        format.json { render json: "failed to insert data", status: :unprocessable_entity }
+      end
+    end
+  end
+
   def delete_mahasiswa
     @data = MahasiswaKela.find(params[:id])
     @data.destroy
@@ -75,6 +93,9 @@ class KelasController < ApplicationController
 
   # GET /kelas/1/edit
   def edit
+  end
+
+  def absensi
   end
 
   # POST /kelas

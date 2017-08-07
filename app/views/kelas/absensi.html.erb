@@ -1,0 +1,91 @@
+<div id="form_app">
+    <div class="box-body">
+        <p id="notice"><%= notice %></p>
+
+        <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-aqua-active">
+                <h3 class="widget-user-username">
+                    <input type="hidden" id="kelas_id" value="<%= @kela.id %>">
+                    <%= @kela.nama %>
+                </h3>
+                <h5 class="widget-user-desc">
+                    <%= @kela.dosen_rel.name %>
+                </h5>
+            </div>
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"><%= @kela.tahun_ajaran %></h5>
+                    <span class="description-text">Tahun Ajaran</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"><%= @kela.mata_pelajaran_rel.name %></h5>
+                    <span class="description-text">MatKul</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <h5 class="description-header">2</h5>
+                    <span class="description-text">SKS</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+          </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div>
+                            Absensi pertemuan ke:
+                            <select id="pertemuan">
+                                <option v-for="n in 28">{{n}}</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover" id="table_data">
+                            <tr>
+                                <th rowspan="2">Name</th>
+                                <th rowspan="2">NIM</th>
+                                <th colspan="3">Keterangan</th>
+                            </tr>
+                            <tr>
+                                <th>Masuk</th>
+                                <th>Izin/Sakit</th>
+                                <th>Tanpa Keterangan</th>
+                            </tr>
+                            <tr v-for="row in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                                <td>{{ row.mahasiswa_rel.name }}</td>
+                                <td>{{ row.mahasiswa_rel.nim }}</td>
+                                <td><input :id="'check'+row.id" :name="'check'+row.id" value="1" type="radio" /></td>
+                                <td><input :id="'check'+row.id" :name="'check'+row.id" value="2" type="radio" /></td>
+                                <td><input :id="'check'+row.id" :name="'check'+row.id" value="3" type="radio" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="button" id="btn-save" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </div>
+</div>
+
+<%= javascript_include_tag 'absensi'%>
