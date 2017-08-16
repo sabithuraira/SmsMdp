@@ -58,10 +58,14 @@ class KelasController < ApplicationController
   def update_absensi
     @list_data = Array.new
 
+    @attr_abs="abs"+params[:abs]
     params[:datas].each do |data|
-      @cur_date = MahasiswaKela.find_by(kelas_id: params[:id], mahasiswa_id: data.id)
-      # @cur_date.abs1 = data.absen
-      @cur_date.update(abs1: data.absen)
+      logger.debug "halo"
+      logger.debug data
+      # @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], mahasiswa_id: data.idnya)
+      # @cur_data[@attr_abs] = data["absen"]
+      # @cur_data.save
+      # @cur_date.update(abs1: data.absen)
     end
 
     respond_to do |format|

@@ -51,7 +51,7 @@
                     <div class="box-header">
                         <div>
                             Absensi pertemuan ke:
-                            <select id="pertemuan">
+                            <select v-model="abs">
                                 <option v-for="n in 28">{{n}}</option>
                             </select>
                         </div>
@@ -69,12 +69,13 @@
                                 <th>Izin/Sakit</th>
                                 <th>Tanpa Keterangan</th>
                             </tr>
-                            <tr v-for="row in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                            <tr v-for="(row, index) in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
                                 <td>{{ row.mahasiswa_rel.name }}</td>
                                 <td>{{ row.mahasiswa_rel.nim }}</td>
-                                <td><input :id="'check'+row.id" :name="'check'+row.id" value="1" type="radio" /></td>
-                                <td><input :id="'check'+row.id" :name="'check'+row.id" value="2" type="radio" /></td>
-                                <td><input :id="'check'+row.id" :name="'check'+row.id" value="3" type="radio" /></td>
+                                <td><input :name="'check'+row.id" value="1" type="radio"  v-on:change="absensing(index, $event)" /></td>
+                                <td><input :name="'check'+row.id" value="2" type="radio"  v-on:change="absensing(index, $event)"  /></td>
+                                <td><input :name="'check'+row.id" value="3" type="radio"  v-on:change="absensing(index, $event)"  /></td>
+                                <%#v-model="absensi_data[index]"%>
                             </tr>
                         </table>
                     </div>
