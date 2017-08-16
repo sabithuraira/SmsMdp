@@ -34,7 +34,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 type: "POST",
                 data: {
-                    datas: vm.absensi_data,
+                    datas: JSON.stringify(vm.absensi_data),
                     abs: vm.abs,
                 },
                 success: function(data) { 

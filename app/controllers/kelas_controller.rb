@@ -1,4 +1,5 @@
 class KelasController < ApplicationController
+  require 'json'
   before_action :set_kela, only: [:show, :edit, :update, :destroy, :absensi]
 
   # GET /kelas
@@ -59,12 +60,13 @@ class KelasController < ApplicationController
     @list_data = Array.new
 
     @attr_abs="abs"+params[:abs]
-    params[:datas].each do |data|
-      logger.debug "halo"
-      logger.debug data
-      # @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], mahasiswa_id: data.idnya)
-      # @cur_data[@attr_abs] = data["absen"]
-      # @cur_data.save
+    @datas=JSON.parse(params[:datas])
+    @datas.each do |data|
+      logger.info "halo"
+      # logger.info data["idnya"]
+      @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], id: data["idnya"])
+      @cur_data[@attr_abs] = data["absen"]
+      @cur_data.save
       # @cur_date.update(abs1: data.absen)
     end
 
