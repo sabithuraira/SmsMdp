@@ -38,12 +38,14 @@ $(document).ready(function() {
                     abs: vm.abs,
                 },
                 success: function(data) { 
-                    refresh_list_mahasiswa();
-                    $('#myModal').modal('hide');
+                    window.location.replace("http://localhost:3000/kelas/"+id);
                 }.bind(this),
                 error: function(xhr, status, err) {
-                    refresh_list_mahasiswa();
-                    $('#myModal').modal('hide');
+                    // console.log(xhr);
+                    if(xhr.statusText=="OK")
+                        window.location.replace("http://localhost:3000/kelas/"+id);
+                    else
+                        alert("Something's wrong, please refresh page!");
                 }.bind(this)
             });
 

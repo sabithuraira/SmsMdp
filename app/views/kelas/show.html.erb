@@ -1,34 +1,112 @@
-<p id="notice"><%= notice %></p>
+<div id="form_app">
+  <div class="box box-widget widget-user-2">
 
-<p>
-  <strong>Dosen:</strong>
-  <%= @kela.dosen_rel.name %>
-</p>
+      <input type="hidden" id="kelas_id" value="<%= @kela.id %>">
+      <div class="box-header with-border">
+          <h3 class="box-title">Data Detail Kelas</h3>
 
-<p>
-  <strong>Mata pelajaran:</strong>
-  <%= @kela.mata_pelajaran_rel.name %>
-</p>
+          <div class="box-tools pull-right">
+          <%= link_to raw('<i class="fa fa-list"></i> List'), kelas_path, class: "btn btn-box-tool btn-default" %>
+          <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_kela_path, class: "btn btn-box-tool btn-default" %>
+          <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_kela_path(@kela), class: "btn btn-box-tool btn-default" %>
+          <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), kelas_path(@kela), class: "btn btn-box-tool btn-default" , 
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+      
+          </div>
+      </div>
+      <!-- Add the bg color to the header using any of the bg-* classes -->
+      <div class="widget-user-header">
+          <!-- /.widget-user-image -->
+          <h3 class="widget-user-username"><%= @kela.nama %></h3>
+          <h3 class="widget-user-username"><%= @kela.dosen_rel.name %></h3>
+          <h5 class="widget-user-desc"><%= @kela.mata_pelajaran_rel.name %></h5>
+          <h5 class="widget-user-desc"><%= @kela.tahun_ajaran %></h5>
+      </div>
+      <div class="box-footer no-padding">
+          <ul class="nav nav-stacked">
+          <li><a href="#">Created Date <span class="pull-right"><%= @kela.created_at %></span></a></li>
+          <li><a href="#">Last Modified <span class="pull-right"><%= @kela.updated_at %></span></a></li>
+          </ul>
+      </div>
+  </div>
 
-<p>
-  <strong>Tahun ajaran:</strong>
-  <%= @kela.tahun_ajaran %>
-</p>
+  <div class="row">
+      <div class="col-xs-12">
+          <div class="box">
+              <div class="box-header">
+                  <h3 class="box-title">Daftar Mahasiswa</h3>
+              </div>
+  
+              <div class="box-body table-responsive no-padding">
+                  <span><i>Ket absensi: Masuk=1, Izin/sakit=2, Tanpa Keterangan=3</i></span>
+                  <table class="table table-hover" id="table_data">
+                      <tr>
+                          <th rowspan="2">Name</th>
+                          <th rowspan="2">NIM</th>
+                          <th style="text-align:center" colspan="4">Nilai</th>
+                          <th style="text-align:center" colspan="28">Absensi</th>
+                      </tr>
+                      <tr>
+                        <th>Kuis</th>
+                        <th>UTS</th>
+                        <th>UAS</th>
+                        <th>Tugas</th>
+                          <th>1</th><th>2</th>
+                          <th>3</th><th>4</th>
+                          <th>5</th><th>6</th>
+                          <th>7</th><th>8</th>
+                          <th>9</th><th>10</th>
+                          <th>11</th><th>12</th>
+                          <th>13</th><th>14</th>
+                          <th>15</th><th>16</th>
+                          <th>17</th><th>18</th>
+                          <th>19</th><th>20</th>
+                          <th>21</th><th>22</th>
+                          <th>23</th><th>24</th>
+                          <th>25</th><th>26</th>
+                          <th>27</th><th>28</th>
+                      </tr>
+                      <tr v-for="row in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                          <td>{{ row.mahasiswa_rel.name }}</td>
+                          <td>{{ row.mahasiswa_rel.nim }}</td>
+                          <td>{{ row.quiz }}</td>
+                          <td>{{ row.uts }}</td>
+                          <td>{{ row.uas }}</td>
+                          <td>{{ row.tugas }}</td>
+                          <td>{{ row.abs1 }}</td>
+                          <td>{{ row.abs2 }}</td>
+                          <td>{{ row.abs3 }}</td>
+                          <td>{{ row.abs4 }}</td>
+                          <td>{{ row.abs5 }}</td>
+                          <td>{{ row.abs6 }}</td>
+                          <td>{{ row.abs7 }}</td>
+                          <td>{{ row.abs8 }}</td>
+                          <td>{{ row.abs9 }}</td>
+                          <td>{{ row.abs11 }}</td>
+                          <td>{{ row.abs12 }}</td>
+                          <td>{{ row.abs13 }}</td>
+                          <td>{{ row.abs14 }}</td>
+                          <td>{{ row.abs15 }}</td>
+                          <td>{{ row.abs16 }}</td>
+                          <td>{{ row.abs17 }}</td>
+                          <td>{{ row.abs18 }}</td>
+                          <td>{{ row.abs19 }}</td>
+                          <td>{{ row.abs20 }}</td>
+                          <td>{{ row.abs21 }}</td>
+                          <td>{{ row.abs22 }}</td>
+                          <td>{{ row.abs23 }}</td>
+                          <td>{{ row.abs24 }}</td>
+                          <td>{{ row.abs25 }}</td>
+                          <td>{{ row.abs26 }}</td>
+                          <td>{{ row.abs27 }}</td>
+                          <td>{{ row.abs28 }}</td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
 
-<p>
-  <strong>Nama:</strong>
-  <%= @kela.nama %>
-</p>
-
-<p>
-  <strong>Created by:</strong>
-  <%= @kela.created_by %>
-</p>
-
-<p>
-  <strong>Updated by:</strong>
-  <%= @kela.updated_by %>
-</p>
-
-<%= link_to 'Edit', edit_kela_path(@kela) %> |
-<%= link_to 'Back', kelas_path %>
+<%= javascript_include_tag 'kelas'%>

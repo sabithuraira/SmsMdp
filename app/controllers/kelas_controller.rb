@@ -62,12 +62,9 @@ class KelasController < ApplicationController
     @attr_abs="abs"+params[:abs]
     @datas=JSON.parse(params[:datas])
     @datas.each do |data|
-      logger.info "halo"
-      # logger.info data["idnya"]
       @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], id: data["idnya"])
       @cur_data[@attr_abs] = data["absen"]
       @cur_data.save
-      # @cur_date.update(abs1: data.absen)
     end
 
     respond_to do |format|
