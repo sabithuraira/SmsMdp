@@ -57,18 +57,36 @@ class KelasController < ApplicationController
   end
 
   def update_absensi
-    @list_data = Array.new
+    @result=false;
 
-    @attr_abs="abs"+params[:abs]
-    @datas=JSON.parse(params[:datas])
-    @datas.each do |data|
-      @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], id: data["idnya"])
-      @cur_data[@attr_abs] = data["absen"]
-      @cur_data.save
+    @pertemuan = KelasPertemuan.new
+    @pertemuan.kelas_id=params[:id]
+    @pertemuan.pertemuan_ke=params[:abs]
+    @pertemuan.tanggal=params[:tanggal]
+    @pertemuan.materi=params[:materi]
+    @pertemuan.keterangan=params[:keterangan]
+    @pertemuan.created_by = current_user.id
+    @pertemuan.updated_by = current_user.id
+
+    if @pertemuan.save
+
+      @list_data = Array.new
+
+      @attr_abs="abs"+params[:abs]
+      @datas=JSON.parse(params[:datas])
+      @datas.each do |data|
+        @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], id: data["idnya"])
+        @cur_data[@attr_abs] = data["absen"]
+        @cur_data.save
+      end
+      
+      if MahasiswaKela.create(@list_data)
+        @result= true;
+      end
     end
 
     respond_to do |format|
-      if MahasiswaKela.create(@list_data)
+      if @result
         format.json { render json: "success insert data", status: :ok }
       else
         format.json { render json: "failed to insert data", status: :unprocessable_entity }
@@ -99,6 +117,7 @@ class KelasController < ApplicationController
   end
 
   def absensi
+    @pertemuan_ke=KelasPertemuan.pertemuan(params[:id])
   end
 
   # POST /kelas

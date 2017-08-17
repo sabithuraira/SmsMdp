@@ -49,20 +49,43 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <div>
-                            Absensi pertemuan ke:
-                            <select v-model="abs">
-                                <option v-for="n in 28">{{n}}</option>
-                            </select>
+                        <b>Absensi pertemuan ke <%= @pertemuan_ke %></b>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Materi</label>
+                                    <input type="text" v-model="materi" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Keterangan</label>
+                                    <input type="text" v-model="keterangan" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tanggal</label>
+                                    <input type="hidden" v-model="abs" value="<%= @pertemuan_ke %>">
+                                    <%#<input type="text" id="tanggal" class="form-control">%>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="tanggal">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
         
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover" id="table_data">
                             <tr>
-                                <th rowspan="2">Name</th>
-                                <th rowspan="2">NIM</th>
-                                <th colspan="3">Keterangan</th>
+                                <th rowspan="2" style="vertical-align:middle">Name</th>
+                                <th rowspan="2" style="vertical-align:middle">NIM</th>
+                                <th colspan="3" style="text-align:center">Keterangan</th>
                             </tr>
                             <tr>
                                 <th>Masuk</th>
