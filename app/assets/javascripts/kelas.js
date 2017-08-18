@@ -8,6 +8,20 @@ var vm = new Vue({
         mahasiswa_rel:[],
         pertemuan:[],
         selectedId: 0,
+    },
+    methods: {
+        percentageAbs: function (index) {
+            if(this.pertemuan.length==0){
+                return 0;
+            }
+            else{
+                var total=0;
+                for(var i=1;i<=this.pertemuan.length;++i){
+                    if(this.mahasiswa_rel[index]["abs"+i]==1) total+=1;
+                }
+                return (total/this.pertemuan.length*100).toFixed(2);;
+            }
+        }
     }
 });
 $(document).ready(function() {

@@ -7,10 +7,10 @@ var vm = new Vue({
         mahasiswa_rel:[],
         absensi_data:[],
         selectedId: 0,
-        abs: "1",
         // tanggal: "",
         materi: "",
-        keterangan: ""
+        keterangan: "",
+        is_uas:0,
     },
     methods:{
         absensing: function(index, event){
@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 
     $('#tanggal').datepicker({
-            forceParse: false
+        forceParse: false
     });
 
     if(form_app!=null){
@@ -40,11 +40,12 @@ $(document).ready(function() {
                     dataType: 'json',
                     type: "POST",
                     data: {
-                        abs: vm.abs,
+                        abs: $("#abs").val(),
                         tanggal: $("#tanggal").val(),
                         materi: vm.materi,
                         keterangan: vm.keterangan,
                         datas: JSON.stringify(vm.absensi_data),
+                        is_uas: vm.is_uas,
                     },
                     success: function(data) { 
                         window.location.replace("http://localhost:3000/kelas/"+id);

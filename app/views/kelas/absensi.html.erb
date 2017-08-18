@@ -66,8 +66,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" class="minimal" v-model="is_uas" >
+                                        Apakah pertemuan ini dilakukan sebelum UAS?
+                                    </label>
+                                    <%#<input type="check" v-model="is_uas" class="form-control">%>
+                                </div>
+
+                                <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="hidden" v-model="abs" value="<%= @pertemuan_ke %>">
+                                    <input type="hidden" id="abs" value="<%= @pertemuan_ke %>">
                                     <%#<input type="text" id="tanggal" class="form-control">%>
                                     <div class="input-group date">
                                         <div class="input-group-addon">
