@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post '/kelas/update_absensi/:id', to: 'kelas#update_absensi'
   get '/kelas/subsetmahasiswa/:id', to: 'kelas#subsetmahasiswa', :defaults => { :format => 'json' }
   get '/kelas/mahasiswa_rel/:id', to: 'kelas#mahasiswa_rel', :defaults => { :format => 'json' }
+  get '/kelas/pertemuan/:id', to: 'kelas#pertemuan', :defaults => { :format => 'json' }
   post '/kelas/update_mahasiswa/:id', to: 'kelas#update_mahasiswa', :defaults => { :format => 'json' }
   delete '/kelas/delete_mahasiswa/:id', to: 'kelas#delete_mahasiswa', :defaults => { :format => 'json' }
   resources :kelas, :as => "kelas"

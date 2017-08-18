@@ -12,7 +12,6 @@
           <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), kelas_path(@kela), class: "btn btn-box-tool btn-default" , 
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
-      
           </div>
       </div>
       <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -28,6 +27,35 @@
           <li><a href="#">Created Date <span class="pull-right"><%= @kela.created_at %></span></a></li>
           <li><a href="#">Last Modified <span class="pull-right"><%= @kela.updated_at %></span></a></li>
           </ul>
+      </div>
+  </div>
+
+
+  <div class="row">
+      <div class="col-xs-12">
+          <div class="box">
+              <div class="box-header">
+                  <h3 class="box-title">Daftar Pertemuan</h3>
+              </div>
+  
+              <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover" id="table_pertemuan">
+                      <tr>
+                          <th>Pertemuan ke</th>
+                          <th>Tanggal</th>
+                          <th>Materi</th>
+                          <th>Keterangan</th>
+                      </tr>
+                      
+                      <tr v-for="row in pertemuan" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                          <td>{{ row.pertemuan_ke }}</td>
+                          <td>{{ row.tanggal }}</td>
+                          <td>{{ row.materi }}</td>
+                          <td>{{ row.keterangan }}</td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
       </div>
   </div>
 

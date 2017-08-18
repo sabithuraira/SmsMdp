@@ -6,6 +6,7 @@ var vm = new Vue({
         datas: [],
         check_data:[],
         mahasiswa_rel:[],
+        pertemuan:[],
         selectedId: 0,
     }
 });
@@ -61,6 +62,10 @@ $(document).ready(function() {
 
             $.getJSON("http://localhost:3000/kelas/mahasiswa_rel/"+id+".json", (response) => { 
                 vm.mahasiswa_rel = response;
+            });
+
+            $.getJSON("http://localhost:3000/kelas/pertemuan/"+id+".json", (response) => { 
+                vm.pertemuan = response;
             });
         }
 

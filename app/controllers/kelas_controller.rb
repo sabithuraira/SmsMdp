@@ -33,6 +33,14 @@ class KelasController < ApplicationController
     end
   end
 
+  def pertemuan
+    @datas = KelasPertemuan.by_kelas(params[:id])
+    
+    respond_to do |format|
+        format.json { render json: @datas}
+    end
+  end
+
   def update_mahasiswa
     # @list_mahasiswa = params[:datas];
 
