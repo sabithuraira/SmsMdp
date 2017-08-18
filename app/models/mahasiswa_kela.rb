@@ -6,13 +6,14 @@ class MahasiswaKela < ApplicationRecord
     end
 
     def self.sent_absen_info(id)
-        @datas = by_kelas(id)
+        datas = by_kelas(id)
         
-        @datas.each do |row| 
+        datas.each do |row| 
+            # puts percentage_absen(row) 
             if(percentage_absen(row)<70)
                 sms = Outbox.new
-                sms.DestinationNumber= self.mahasiswa_rel.parent_phone
-                sms.TextDecoded= "Absen #{self.mahasiswa_rel.name} matkul #{self.mata_pelajaran_rel.name} #{self.nilai}. Terima kasih"
+                sms.DestinationNumber= row.mahasiswa_rel.parent_phone
+                sms.TextDecoded= "Absen #{row.mahasiswa_rel.name} #{percentage_absen(row)}% kurang 70% dan tidak bisa mengikuti ujian. Terima kasih"
                 sms.CreatorID= "Gammu"
                 sms.save
             end
@@ -20,17 +21,21 @@ class MahasiswaKela < ApplicationRecord
     end
 
     def self.percentage_absen(row)
-        pertemuan = KelasPertemuan.pertemuan(id)
-        total_abs=0;
+        # puts row.inspect
+        pertemuan = KelasPertemuan.pertemuan(row.kelas_id) - 1
+        total_abs=0
 
         for i in 1..pertemuan
-            total_abs=row["abs"+i]
+            if row["abs"+i.to_s]==1
+                total_abs+=1 
+            end
         end
 
-        if(total_abs==0)
+
+        if total_abs==0
             return 0
         else
-            return (total_abs/pertemuan*100)
+            return (total_abs.to_f/pertemuan.to_f*100)
         end
     end
 end

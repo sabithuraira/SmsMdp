@@ -10,7 +10,6 @@ var vm = new Vue({
         // tanggal: "",
         materi: "",
         keterangan: "",
-        is_uas:0,
     },
     methods:{
         absensing: function(index, event){
@@ -25,7 +24,8 @@ $(document).ready(function() {
 
 
     $('#tanggal').datepicker({
-        forceParse: false
+        format: "yyyy-mm-dd"
+        // forceParse: false
     });
 
     if(form_app!=null){
@@ -33,7 +33,8 @@ $(document).ready(function() {
 
         $('#btn-save').on('click', function(e) {
             e.preventDefault();
-            // console.log($("#tanggal").val());
+            // console.log($("#is_uas:checked").val() ? 1 : 0);
+            
             if(validation){
                 $.ajax({
                     url: "http://localhost:3000/kelas/update_absensi/"+id+".json",
@@ -45,7 +46,7 @@ $(document).ready(function() {
                         materi: vm.materi,
                         keterangan: vm.keterangan,
                         datas: JSON.stringify(vm.absensi_data),
-                        is_uas: vm.is_uas,
+                        is_uas: $("#is_uas:checked").val() ? 1 : 0,
                     },
                     success: function(data) { 
                         window.location.replace("http://localhost:3000/kelas/"+id);

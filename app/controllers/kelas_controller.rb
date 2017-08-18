@@ -73,7 +73,7 @@ class KelasController < ApplicationController
     @pertemuan.tanggal=params[:tanggal]
     @pertemuan.materi=params[:materi]
     @pertemuan.keterangan=params[:keterangan]
-    @pertemuan.is_uas=params[:is_uas]
+    @pertemuan.is_before_uas=params[:is_uas]
     @pertemuan.created_by = current_user.id
     @pertemuan.updated_by = current_user.id
 
@@ -90,9 +90,9 @@ class KelasController < ApplicationController
       end
       
       if MahasiswaKela.create(@list_data)
-        if(params[:is_uas]==1){
+        if(params[:is_uas]=="1")
           MahasiswaKela.sent_absen_info(params[:id])
-        }
+        end
         @result= true;
       end
     end
