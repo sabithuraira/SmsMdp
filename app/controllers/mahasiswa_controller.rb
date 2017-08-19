@@ -46,6 +46,7 @@ class MahasiswaController < ApplicationController
 
     def show
         @data = Mahasiswa.find(params[:id])
+        @list_kelas = MahasiswaKela.by_mahasiswa(params[:id])
     end
 
     def destroy

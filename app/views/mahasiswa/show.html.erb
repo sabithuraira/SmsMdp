@@ -25,3 +25,42 @@
          </ul>
     </div>
 </div>
+
+<div class="row">
+      <div class="col-xs-12">
+          <div class="box">
+              <div class="box-header">
+                  <h3 class="box-title">Kelas yang diikuti</h3>
+              </div>
+  
+              <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover" id="table_pertemuan">
+                      <tr>
+                          <th rowspan="2" style="text-align:center;vertical-align:middle">Nama</th>
+                          <th rowspan="2" style="text-align:center;vertical-align:middle">Tahun Ajaran</th>
+                          <th style="text-align:center" colspan="4">Nilai</th>
+                          <th rowspan="2" style="text-align:center;vertical-align:middle">% Absensi</th>
+                      </tr>
+                      <tr>
+                        <th>Kuis</th>
+                        <th>Tugas</th>
+                        <th>UTS</th>
+                        <th>UAS</th>
+                      </tr>
+                      
+                    <% @list_kelas.each do |row| %>
+                        <tr class="accordion-toggle">
+                            <td><%= row.kelas_rel.nama %></td>
+                            <td><%= row.kelas_rel.tahun_ajaran %></td>
+                            <td><%= row.quiz %></td>
+                            <td><%= row.tugas %></td>
+                            <td><%= row.uts %></td>
+                            <td><%= row.uas %></td>
+                            <td></td>
+                        </tr>
+                    <% end %>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
