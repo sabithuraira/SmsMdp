@@ -1,0 +1,108 @@
+<div id="form_app">
+    <div class="box-body">
+        <p id="notice"><%= notice %></p>
+
+        <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-aqua-active">
+                <h3 class="widget-user-username">
+                    <input type="hidden" id="kelas_id" value="<%= @kela.id %>">
+                    <%= @kela.nama %>
+                </h3>
+                <h5 class="widget-user-desc">
+                    <%= @kela.dosen_rel.name %>
+                </h5>
+            </div>
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"><%= @kela.tahun_ajaran %></h5>
+                    <span class="description-text">Tahun Ajaran</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"><%= @kela.mata_pelajaran_rel.name %></h5>
+                    <span class="description-text">MatKul</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <h5 class="description-header">2</h5>
+                    <span class="description-text">SKS</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+          </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Nilai untuk:</label>
+                                    <select v-model="nilai" class="form-control">
+                                        <option value="uts">UTS</option>
+                                        <option value="tugas">Tugas</option>
+                                        <option value="quiz">Quiz</option>
+                                        <option value="uas">UAS</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Keterangan</label>
+                                    <input type="text" v-model="keterangan" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tanggal</label>
+                                    <input type="hidden" id="abs" value="<%= @pertemuan_ke %>">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="tanggal">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover" id="table_data">
+                            <tr>
+                                <th>Name</th>
+                                <th>NIM</th>
+                                <th>Nilai</th>
+                            </tr>
+                            <tr v-for="(row, index) in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
+                                <td>{{ row.mahasiswa_rel.name }}</td>
+                                <td>{{ row.mahasiswa_rel.nim }}</td>
+                                <td><input :name="'nilai'+row.id" type="number"  v-on:change="penilaian(index, $event)" /></td>
+                                <%#v-model="absensi_data[index]"%>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="button" id="btn-save" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </div>
+</div>
+
+<%= javascript_include_tag 'nilai'%>

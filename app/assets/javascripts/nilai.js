@@ -5,15 +5,13 @@ var vm = new Vue({
     data: {
         check_data:[],
         mahasiswa_rel:[],
-        absensi_data:[],
-        selectedId: 0,
-        // tanggal: "",
-        materi: "",
+        nilai_data:[],
         keterangan: "",
+        nilai:"tugas",
     },
     methods:{
-        absensing: function(index, event){
-            this.absensi_data[index]={idnya: event.target.name.substring(5), absen: event.target.value};
+        penilaian: function(index, event){
+            this.nilai_data[index]={idnya: event.target.name.substring(5), absen: event.target.value};
             // console.log(this.absensi_data);
         }
     }
@@ -37,16 +35,14 @@ $(document).ready(function() {
             
             if(validation()){
                 $.ajax({
-                    url: "http://localhost:3000/kelas/update_absensi/"+id+".json",
+                    url: "http://localhost:3000/kelas/update_nilai/"+id+".json",
                     dataType: 'json',
                     type: "POST",
                     data: {
-                        abs: $("#abs").val(),
                         tanggal: $("#tanggal").val(),
-                        materi: vm.materi,
                         keterangan: vm.keterangan,
-                        datas: JSON.stringify(vm.absensi_data),
-                        is_uas: $("#is_uas:checked").val() ? 1 : 0,
+                        nilai: vm.nilai,
+                        datas: JSON.stringify(vm.nilai_data),
                     },
                     success: function(data) { 
                         window.location.replace("http://localhost:3000/kelas/"+id);
@@ -73,10 +69,10 @@ $(document).ready(function() {
         }
 
         function validation(){
-            if(vm.absensi_data.length<vm.mahasiswa_rel)
+            if(vm.nilai_data.length<vm.mahasiswa_rel)
                 return false;
 
-            if(vm.abs.length==0 ||  vm.materi.length==0)
+            if(vm.keterangan.length==0)
                 return false;
 
             return true;

@@ -1,6 +1,6 @@
 class KelasController < ApplicationController
   require 'json'
-  before_action :set_kela, only: [:show, :edit, :update, :destroy, :absensi]
+  before_action :set_kela, only: [:show, :edit, :update, :destroy, :absensi, :nilai]
 
   # GET /kelas
   # GET /kelas.json
@@ -106,6 +106,43 @@ class KelasController < ApplicationController
     end
   end
 
+
+
+  def update_nilai
+    @result=false;
+
+    @penilaian = KelasPenilaian.new
+    @penilaian.kelas_id=params[:id]
+    @penilaian.tanggal=params[:tanggal]
+    @penilaian.keterangan=params[:keterangan]
+    @penilaian.created_by = current_user.id
+    @penilaian.updated_by = current_user.id
+
+    if @penilaian.save
+
+      @list_data = Array.new
+
+      @datas=JSON.parse(params[:datas])
+      @datas.each do |data|
+        @cur_data = MahasiswaKela.find_by(kelas_id: params[:id], id: data["idnya"])
+        @cur_data[params[:nilai]] = data["absen"]
+        @cur_data.save
+      end
+      
+      if MahasiswaKela.create(@list_data)
+        @result= true;
+      end
+    end
+
+    respond_to do |format|
+      if @result
+        format.json { render json: "success insert data", status: :ok }
+      else
+        format.json { render json: "failed to insert data", status: :unprocessable_entity }
+      end
+    end
+  end
+
   def delete_mahasiswa
     @data = MahasiswaKela.find(params[:id])
     @data.destroy
@@ -130,6 +167,9 @@ class KelasController < ApplicationController
 
   def absensi
     @pertemuan_ke=KelasPertemuan.pertemuan(params[:id])
+  end
+
+  def nilai
   end
 
   # POST /kelas

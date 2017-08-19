@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   post '/outbox/search', to: 'outbox#search'
   post '/sentitem/search', to: 'sentitem#search'
   get '/kelas/absensi/:id', to: 'kelas#absensi'
+  get '/kelas/nilai/:id', to: 'kelas#nilai'
   post '/kelas/update_absensi/:id', to: 'kelas#update_absensi'
+  post '/kelas/update_nilai/:id', to: 'kelas#update_nilai'
   get '/kelas/subsetmahasiswa/:id', to: 'kelas#subsetmahasiswa', :defaults => { :format => 'json' }
   get '/kelas/mahasiswa_rel/:id', to: 'kelas#mahasiswa_rel', :defaults => { :format => 'json' }
   get '/kelas/pertemuan/:id', to: 'kelas#pertemuan', :defaults => { :format => 'json' }

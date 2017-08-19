@@ -10,6 +10,7 @@
           <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_kela_path, class: "btn btn-box-tool btn-default" %>
           <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_kela_path(@kela), class: "btn btn-box-tool btn-default" %>
           <%= link_to raw('<i class="fa fa-child"></i> Absensi'), "absensi/"+@kela.id.to_s, class: "btn btn-box-tool btn-default" %>
+          <%= link_to raw('<i class="fa fa-diamond"></i> Nilai'), "nilai/"+@kela.id.to_s, class: "btn btn-box-tool btn-default" %>
           <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), kelas_path(@kela), class: "btn btn-box-tool btn-default" , 
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
@@ -79,18 +80,18 @@
                       </tr>
                       <tr>
                         <th>Kuis</th>
+                        <th>Tugas</th>
                         <th>UTS</th>
                         <th>UAS</th>
-                        <th>Tugas</th>
                         <th v-for="row in pertemuan">{{ row.pertemuan_ke }}</th>
                       </tr>
                       <tr v-for="(row, index) in mahasiswa_rel" data-toggle="collapse" :data-target="row.id" class="accordion-toggle">
                             <td>{{ row.mahasiswa_rel.name }}</td>
                             <td>{{ row.mahasiswa_rel.nim }}</td>
                             <td>{{ row.quiz }}</td>
+                            <td>{{ row.tugas }}</td>
                             <td>{{ row.uts }}</td>
                             <td>{{ row.uas }}</td>
-                            <td>{{ row.tugas }}</td>
                             <td v-for="row2 in pertemuan">{{ row['abs'+row2.pertemuan_ke] }}</td>
                             <td>{{ percentageAbs(index) }} %</td>
                       </tr>
