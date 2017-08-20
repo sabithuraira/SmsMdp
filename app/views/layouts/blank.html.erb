@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SMS STMIK GI MDP</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+  </head>
+
+<body class="hold-transition skin-blue sidebar-mini fixed sidebar-mini">
+<div class="wrapper">
+  <%= render "layouts/header" %>
+  <%= render "layouts/navigation" %>
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        <b><%= t('title.header') %></b> 
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+          <%= yield %>
+      </div>
+    </section>
+  </div>
+
+  <%= render "layouts/footer" %>
+  <%= render "layouts/sidebar" %>
+</div>
+  
+</body>
+</html>
