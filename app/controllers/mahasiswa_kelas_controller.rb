@@ -1,4 +1,5 @@
 class MahasiswaKelasController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_mahasiswa_kela, only: [:show, :edit, :update, :destroy]
 
   # GET /mahasiswa_kelas

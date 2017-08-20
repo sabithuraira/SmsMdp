@@ -1,5 +1,7 @@
 class KelasController < ApplicationController
   require 'json'
+  
+  before_filter :authenticate_user!
   before_action :set_kela, only: [:show, :edit, :update, :destroy, :absensi, :nilai]
 
   # GET /kelas

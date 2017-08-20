@@ -1,4 +1,6 @@
 class OutboxController < ApplicationController
+    before_filter :authenticate_user!
+  
     def index
         @datas = Outbox.all
     end

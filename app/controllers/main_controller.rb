@@ -1,6 +1,6 @@
 class MainController < ApplicationController
     before_filter :authenticate_user!
-
+  
     layout "blank", only: [:index]
 
     def index

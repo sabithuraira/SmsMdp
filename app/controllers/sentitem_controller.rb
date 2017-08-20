@@ -1,4 +1,6 @@
 class SentitemController < ApplicationController
+    before_filter :authenticate_user!
+  
     def index
         @datas = SentItem.all
     end

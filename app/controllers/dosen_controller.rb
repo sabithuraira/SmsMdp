@@ -1,4 +1,6 @@
 class DosenController < ApplicationController
+    before_filter :authenticate_user!
+    
     def index
         @datas = Dosen.all
     end
