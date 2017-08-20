@@ -42,6 +42,7 @@ class DosenController < ApplicationController
 
     def show
         @data = Dosen.find(params[:id])
+        @list_kelas = Kela.by_dosen(params[:id])
     end
 
     def destroy
