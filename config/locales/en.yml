@@ -46,4 +46,8 @@ en:
         password_confirmation: Konfirmasi Password
         date_birth: Tanggal Lahir
         place_birth: Tempat Lahir
+      kela:
+        sks: Jumlah SKS
+        dosen_id: Dosen Pengajar
+        mata_pelajaran_id: Mata Kuliah
 

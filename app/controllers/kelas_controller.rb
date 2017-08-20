@@ -227,6 +227,6 @@ class KelasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kela_params
-      params.require(:kela).permit(:dosen_id, :mata_pelajaran_id, :tahun_ajaran, :nama, :created_by, :updated_by)
+      params.require(:kela).permit(:dosen_id, :mata_pelajaran_id, :tahun_ajaran, :nama, :sks)
     end
 end

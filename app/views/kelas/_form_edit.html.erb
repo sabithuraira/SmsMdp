@@ -18,13 +18,13 @@
                 </div>
 
                 <div class="form-group">
-                <label>Dosen</label>
+                <%= f.label :dosen_id %>
                 <input type="hidden" id="kelas_id" value="<%= kela.id %>">
                 <%= f.collection_select :dosen_id, Dosen.all, :id, :name, {:prompt=>"Pilih Dosen"}, {:class=>"form-control"} %>
                 </div>
 
                 <div class="form-group">
-                <label>Mata Kuliah</label>
+                <%= f.label :mata_pelajaran_id %>
                 <%= f.collection_select :mata_pelajaran_id, MataPelajaran.all, :id, :name, {:prompt=>"Pilih Mata Pelajaran"}, {:class=>"form-control"} %>
                 </div>
 
@@ -36,6 +36,11 @@
                 <div class="form-group">
                     <%= f.label :nama %>
                     <%= f.text_field :nama, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :sks %>
+                    <%= f.number_field :sks, class: "form-control", placeholder: "Jumlah SKS" %>
                 </div>
             </div>
         </div>

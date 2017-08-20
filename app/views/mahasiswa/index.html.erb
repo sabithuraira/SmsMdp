@@ -36,9 +36,10 @@
             <td>
                 <%= link_to raw('<i class="fa fa-search"></i> Show'), mahasiswa_path(data), class: "btn btn-box-tool btn-default" %>
                 <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_mahasiswa_path(data), class: "btn btn-box-tool btn-default" %>
-                <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), mahasiswa_path(data), class: "btn btn-box-tool btn-default" , 
+                <%# link_to raw('<i class="fa fa-remove"></i> Destroy'), mahasiswa_path(data), class: "btn btn-box-tool btn-default" , 
                     method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
+                    data: { confirm: 'Are you sure?' } 
+                  %>
             </td>
             </tr>
           <% end %>

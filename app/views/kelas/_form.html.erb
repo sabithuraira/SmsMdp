@@ -17,23 +17,28 @@
             </div>
 
             <div class="form-group">
-              <label>Dosen</label>
+              <%= f.label :dosen_id %>
               <%= f.collection_select :dosen_id, Dosen.all, :id, :name, {:prompt=>"Pilih Dosen"}, {:class=>"form-control"} %>
             </div>
 
             <div class="form-group">
-              <label>Mata Kuliah</label>
+              <%= f.label :mata_pelajaran_id %>
               <%= f.collection_select :mata_pelajaran_id, MataPelajaran.all, :id, :name, {:prompt=>"Pilih Mata Pelajaran"}, {:class=>"form-control"} %>
             </div>
 
             <div class="form-group">
                 <%= f.label :tahun_ajaran %>
-                <%= f.text_field :tahun_ajaran, class: "form-control" %>
+                <%= f.text_field :tahun_ajaran, class: "form-control", placeholder: "Tahun ajaran" %>
             </div>
 
             <div class="form-group">
                 <%= f.label :nama %>
-                <%= f.text_field :nama, class: "form-control" %>
+                <%= f.text_field :nama, class: "form-control", placeholder: "Nama/Identitas kelas" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :sks %>
+                <%= f.number_field :sks, class: "form-control", placeholder: "Jumlah SKS" %>
             </div>
           </div>
         </div>
