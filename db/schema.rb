@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820170631) do
+ActiveRecord::Schema.define(version: 20170820172921) do
 
   create_table "absensis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "mahasiswa_id"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170820170631) do
     t.decimal  "uts",          precision: 64, scale: 12
     t.decimal  "uas",          precision: 64, scale: 12
     t.decimal  "tugas",        precision: 64, scale: 12
+    t.decimal  "total_nilai",  precision: 64, scale: 12
   end
 
   create_table "mahasiswas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

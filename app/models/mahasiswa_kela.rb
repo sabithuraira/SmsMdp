@@ -2,6 +2,8 @@ class MahasiswaKela < ApplicationRecord
     belongs_to :mahasiswa_rel, class_name: "Mahasiswa", foreign_key: "mahasiswa_id"
     belongs_to :kelas_rel, class_name: "Kela", foreign_key: "kelas_id"
 
+    after_save :set_total_nilai
+
     def self.by_kelas(id)
         where('kelas_id=?', id)
     end
@@ -43,4 +45,14 @@ class MahasiswaKela < ApplicationRecord
             return (total_abs.to_f/pertemuan.to_f*100)
         end
     end
+
+    private
+        def set_total_nilai
+            if :uas_changed? || :uts_changed? || :quiz_changed? || :tugas_changed?
+                if self.uas.present? && self.uts.present? && self.tugas.present? && self.quiz.present?
+                    self.update_column(:total_nilai, ((self.tugas * 10) + (self.quiz * 20) + (self.uts * 30) + (self.uas * 40))/100)
+                end
+            end
+        end
+    
 end
