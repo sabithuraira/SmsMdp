@@ -38,7 +38,7 @@
                       <tr>
                           <th rowspan="2" style="text-align:center;vertical-align:middle">Nama</th>
                           <th rowspan="2" style="text-align:center;vertical-align:middle">Tahun Ajaran</th>
-                          <th style="text-align:center" colspan="4">Nilai</th>
+                          <th style="text-align:center" colspan="5">Nilai</th>
                           <th rowspan="2" style="text-align:center;vertical-align:middle">% Absensi</th>
                       </tr>
                       <tr>
@@ -46,9 +46,17 @@
                         <th>Tugas</th>
                         <th>UTS</th>
                         <th>UAS</th>
+                        <th>Nilai Akhir</th>
                       </tr>
                       
-                    <% @list_kelas.each do |row| %>
+                    <% 
+                        total_nilai=0
+                        total_sks=0
+                    %>
+                    <% @list_kelas.each do |row| 
+                        total_sks+=row.kelas_rel.sks 
+                        total_nilai+= (row.total_nilai * row.kelas_rel.sks)
+                    %>
                         <tr class="accordion-toggle">
                             <td><%= row.kelas_rel.nama %></td>
                             <td><%= row.kelas_rel.tahun_ajaran %></td>
@@ -56,9 +64,16 @@
                             <td><%= row.tugas %></td>
                             <td><%= row.uts %></td>
                             <td><%= row.uas %></td>
+                            <td><%= row.total_nilai %></td>
                             <td></td>
                         </tr>
                     <% end %>
+
+                    <tr>
+                        <td>
+
+                        </td>
+                    </tr>
                   </table>
               </div>
           </div>

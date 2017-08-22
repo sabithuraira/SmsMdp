@@ -9,6 +9,7 @@ Things you may can learn from this app:
 * Simple rails apps that connect with MySQL database (you can change it)
 * Authentication (sign in, sign up, logout) using devise (https://github.com/plataformatec/devise)
 * Authentication using Google and Facebook account with (https://github.com/omniauth/omniauth)
+* Integrate with vue.js
 * Search form with ajax
 
 Installation Application:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820172921) do
+ActiveRecord::Schema.define(version: 20170822023921) do
 
   create_table "absensis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "mahasiswa_id"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20170820172921) do
 
   create_table "gammu", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.integer "Version", default: 0, null: false
+  end
+
+  create_table "grades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "grade",       limit: 2,                         null: false
+    t.decimal  "grade_value",           precision: 2, scale: 2
+    t.decimal  "min_value",             precision: 2, scale: 2
+    t.decimal  "max_value",             precision: 2, scale: 2
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   create_table "inbox", primary_key: "ID", unsigned: true, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
@@ -97,8 +108,8 @@ ActiveRecord::Schema.define(version: 20170820172921) do
     t.integer  "kelas_id"
     t.integer  "created_by"
     t.integer  "updated_by"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.integer  "abs1"
     t.integer  "abs2"
     t.integer  "abs3"
@@ -127,11 +138,12 @@ ActiveRecord::Schema.define(version: 20170820172921) do
     t.integer  "abs26"
     t.integer  "abs27"
     t.integer  "abs28"
-    t.decimal  "quiz",         precision: 64, scale: 12
-    t.decimal  "uts",          precision: 64, scale: 12
-    t.decimal  "uas",          precision: 64, scale: 12
-    t.decimal  "tugas",        precision: 64, scale: 12
-    t.decimal  "total_nilai",  precision: 64, scale: 12
+    t.decimal  "quiz",                   precision: 64, scale: 12
+    t.decimal  "uts",                    precision: 64, scale: 12
+    t.decimal  "uas",                    precision: 64, scale: 12
+    t.decimal  "tugas",                  precision: 64, scale: 12
+    t.decimal  "total_nilai",            precision: 64, scale: 12
+    t.string   "grade",        limit: 2
   end
 
   create_table "mahasiswas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
