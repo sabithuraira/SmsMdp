@@ -1,0 +1,36 @@
+<!-- /.box-header -->
+<%= form_for @data do |f| %>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-group">
+                <%= f.label :grade %>
+                <%= f.text_field :grade, class: "form-control", placeholder: "Grade" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :grade_value %>
+                <%= f.number_field :grade_value, class: "form-control", step: :any, placeholder: "Nilai" %>
+            </div>
+            
+            <div class="form-group">
+                <%= f.label :min_value %>
+                <%= f.number_field :min_value, class: "form-control", step: :any, placeholder: "Nilai Minimum" %>
+            </div>
+            
+            <div class="form-group">
+                <%= f.label :max_value %>
+                <%= f.number_field :max_value, class: "form-control", step: :any, placeholder: "Nilai Maksimum" %>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="box-footer">
+<!--<button type="submit" class="btn btn-default">Cancel</button>-->
+<button type="submit" class="btn btn-info pull-right">Submit</button>
+</div>
+
+<% end %>

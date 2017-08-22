@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :main,:as => "nilais" 
   resources :mp , :as => "mata_pelajarans"
   resources :dosen , :as => "dosens"
+  resources :grade , :as => "grades"
   resources :mahasiswa , :as => "mahasiswas" do  
    get 'absen', on: :collection   
   end

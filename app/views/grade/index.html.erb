@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Daftar Grade</h3>
+        <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_grade_path, class: "btn btn-box-tool btn-default" %> 
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover" id="table_data">
+          <tr>
+            <th>Grade</th>
+            <th>Nilai Grade</th>
+            <th>Batas Bawah Nilai</th>
+            <th>Batas Atas Nilai</th>
+            <th></th>
+          </tr>
+
+          <% @datas.each do |data| %>
+            <tr>
+            <td><%= data.grade %></td>
+            <td><%= data.grade_value %></td>
+            <td><%= data.min_value %></td>
+            <td><%= data.max_value %></td>
+            <td>
+                <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_grade_path(data), class: "btn btn-box-tool btn-default" %>
+                <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), grade_path(data), class: "btn btn-box-tool btn-default" , 
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+            </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
