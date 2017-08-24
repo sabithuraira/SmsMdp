@@ -50,7 +50,20 @@ class MahasiswaKela < ApplicationRecord
         def set_total_nilai
             if :uas_changed? || :uts_changed? || :quiz_changed? || :tugas_changed?
                 if self.uas.present? && self.uts.present? && self.tugas.present? && self.quiz.present?
-                    self.update_column(:total_nilai, ((self.tugas * 10) + (self.quiz * 20) + (self.uts * 30) + (self.uas * 40))/100)
+                    aggregate_nilai = ((self.tugas * 10) + (self.quiz * 20) + (self.uts * 30) + (self.uas * 40))/100
+                    grade = "A"
+
+                    # all_grades = Grade.all
+                    
+                    Grade.all.each do |data_grade|
+                        if aggregate_nilai<=data_grade.max_value && aggregate_nilai>=data_grade.min_value
+                            grade=data_grade.grade 
+                            break    
+                        end
+                    end
+                    
+                    self.update_column(:total_nilai, aggregate_nilai)
+                    self.update_column(:grade, grade)
                 end
             end
         end

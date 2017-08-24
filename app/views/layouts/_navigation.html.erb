@@ -13,6 +13,18 @@
         <% if current_user.level_access == "admin" %>
           <li class="treeview">
             <a href="#">
+              <i class="fa fa-envelope-o"></i> <span>Master Data</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="treeview"><%= link_to raw('Grades'), grades_path %></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
               <i class="fa fa-envelope-o"></i> <span>SMS</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
