@@ -38,7 +38,7 @@
                       <tr>
                           <th rowspan="2" style="text-align:center;vertical-align:middle">Nama</th>
                           <th rowspan="2" style="text-align:center;vertical-align:middle">Tahun Ajaran</th>
-                          <th style="text-align:center" colspan="5">Nilai</th>
+                          <th style="text-align:center" colspan="6">Nilai</th>
                           <th rowspan="2" style="text-align:center;vertical-align:middle">% Absensi</th>
                       </tr>
                       <tr>
@@ -47,6 +47,7 @@
                         <th>UTS</th>
                         <th>UAS</th>
                         <th>Nilai Akhir</th>
+                        <th>Grade</th>
                       </tr>
                       
                     <% 
@@ -54,8 +55,13 @@
                         total_sks=0
                     %>
                     <% @list_kelas.each do |row| 
-                        total_sks+=row.kelas_rel.sks 
-                        total_nilai+= (row.total_nilai * row.kelas_rel.sks)
+                        if row.grade.present?
+                            total_sks+=row.kelas_rel.sks 
+                            grade = Grade.find_by grade:row.grade
+                            puts row.grade
+                            total_nilai+= (grade.grade_value.to_f * row.kelas_rel.sks.to_f)
+                        end
+                        @ipk = total_nilai/total_sks;
                     %>
                         <tr class="accordion-toggle">
                             <td><%= row.kelas_rel.nama %></td>
@@ -65,13 +71,14 @@
                             <td><%= row.uts %></td>
                             <td><%= row.uas %></td>
                             <td><%= row.total_nilai %></td>
+                            <td><%= row.grade %></td>
                             <td></td>
                         </tr>
                     <% end %>
 
                     <tr>
-                        <td>
-
+                        <td colspan="9">
+                            <h1 style="text-align:center">IPK: <%= @ipk %></h1>
                         </td>
                     </tr>
                   </table>
