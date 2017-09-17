@@ -76,7 +76,9 @@ $(document).ready(function() {
             if(vm.absensi_data.length<vm.mahasiswa_rel)
                 return false;
 
-            if(vm.abs.length==0 ||  vm.materi.length==0)
+            var abs= $("#abs").val();
+            
+            if(abs.length==0 ||  vm.materi.length==0)
                 return false;
 
             return true;

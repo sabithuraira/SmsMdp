@@ -1,11 +1,11 @@
 <?php
-    //koneksi ke mysql database
     mysql_connect("localhost","root","");
-    mysql_select_db("gammu");
+    mysql_select_db("smsmdp");
 
     //query untuk membaca SMS yang belum diproses
     $query = "SELECT * FROM inbox WHERE Processed = 'false'";
     $hasil = mysql_query($query);
+
     while($data= mysql_fetch_array($hasil)){
 
         //baca id sms
@@ -17,184 +17,105 @@
 
         //baca pesan SMS dan ubah jadi kapital
         $msg = strtoupper($data['TextDecoded']);
-        //$msg="SOUT 16 09 B0100165 B 10 9;16 09 B0100183 U 10 10";
+        // $msg="ABSENSI 2 8990";
         //proses parsing
         //pecah pesan berdasarkan karakter
         if(strlen($msg)<=160)
         {
-            $first_val=substr($msg, 0,4);
-            if($first_val=="SOUT")
-            {
-                //$phone_num=PhoneNumber::model()->findByAttributes(array('number'=>$noPengirim));
-                $phone_exist="SELECT * FROM phone_number WHERE number='{$noPengirim}'";
+            $total_word=explode(" ", $msg);
+            
+            if(count($total_word)==2){
+                if($total_word[0]=="IPK")
+                {      
+                    // $sql_check="SELECT * FROM m_nks WHERE kode_prov='$prov' AND kode_kab='$kab' AND nks='$nks'";
+                    $sql_get_nilai="SELECT m.nim, mk.grade, g.grade_value, k.sks FROM mahasiswas m, mahasiswa_kelas mk, kelas k, grades g WHERE m.nim='".$total_word[1]."' AND mk.mahasiswa_id=m.id AND mk.kelas_id=k.id AND g.grade=mk.grade";
 
-                $hasil_check_phone=mysql_query($phone_exist);
-                $total_row_phone=mysql_num_rows($hasil_check_phone);
-                
-                if($total_row_phone>0)
-                {
-                    ////////
-                    $inti=substr($msg, 5);
-                    $sub_inti=explode(";", $inti);
+                    $hasil_check=mysql_query($sql_get_nilai);
+                    $total_row=mysql_num_rows($hasil_check);
 
-                    foreach ($sub_inti as $skey => $svalue)
-                    {    
-                        $pecah = explode(" ",$svalue);
-                        if(count($pecah)==6)
-                        {
-                            //$wil=$pecah[1];
-                            //if(strlen($pecah[1])==14)
-                            //{
-                            $prov               =$pecah[0];
-                            $kab                =$pecah[1];
-                            $nks                =$pecah[2]; 
-                            $keterangan         =$pecah[3];
-                            $total_sampel       =$pecah[4];
-                            $total_realisasi    =$pecah[5];
-                            
-                            $sql_check="SELECT * FROM m_nks WHERE kode_prov='$prov' AND kode_kab='$kab' AND nks='$nks'";
-
-                            $hasil_check=mysql_query($sql_check);
-                            $total_row=mysql_num_rows($hasil_check);
-                            
-                            if($total_row>0)
-                            {
-                                $phone_wil="SELECT * FROM phone_wil WHERE kode_prov='$prov' AND kode_kab='$kab' AND 
-                                    nks='$nks' AND number='{$noPengirim}'";
-
-                                $hasil_check_wil=mysql_query($phone_wil);
-                                $total_row_wil=mysql_num_rows($hasil_check_wil);
-
-                                if($total_row_wil>0)
-                                {
-                                    $is_true=0;
-                                    if($keterangan=='U')
-                                    {
-                                        $is_true=1;
-                                    }
-                                    else if($keterangan=='B')
-                                    {
-                                        $row = mysql_fetch_array($hasil_check);
-                                        if(strlen($row['jml_realisasi'])>0)
-                                        {
-                                            $is_true=2;
-                                        }
-                                        else
-                                        {
-                                            $is_true=1;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        $is_true=3;
-                                    }
-
-                                    if($is_true==1)
-                                    {
-                                         $query_update = "UPDATE m_nks SET jml_sample='$total_sampel', 
-                                                jml_realisasi='$total_realisasi' WHERE kode_prov='$prov' 
-                                                AND kode_kab='$kab' AND nks='$nks'";
-                                    
-                                        if(mysql_query($query_update))
-                                        {
-                                            if($skey==0)
-                                                $reply = "$prov $kab $nks berhasil diperbaharui";
-                                            else
-                                                $reply .= ";$prov $kab $nks berhasil diperbaharui";
-                                            
-                                        }
-                                        else
-                                        {
-                                            if($skey==0)
-                                                $reply = "$prov $kab $nks gagal disimpan, ulangi lagi"; 
-                                            else
-                                                $reply .= ";$prov $kab $nks anda gagal disimpan, ulangi lagi"; 
-                                        }
-                                    }
-                                    else if($is_true==2)
-                                    {
-                                        if($skey==0)
-                                            $reply="$prov $kab $nks sudah ada, gunakan format update U untuk memperbaharui data";
-                                        else
-                                            $reply.=";$prov $kab $nks sudah ada, gunakan format update U untuk memperbaharui data";
-                                    }
-                                    else
-                                    {
-                                        if($skey==0)
-                                            $reply="Format $prov $kab $nks salah, ulangi lagi";
-                                        else
-                                            $reply.=";Format $prov $kab $nks salah, ulangi lagi";
-                                        
-                                    }
-                                }
-                                else
-                                {
-                                    if($skey==0)
-                                        $reply="$prov $kab $nks bukan wewenang anda";
-                                    else
-                                        $reply.=";$prov $kab $nks bukan wewenang anda";   
-                                }
-                            }
-                            else
-                            {
-                                if($skey==0)
-                                    $reply = "$prov $kab $nks tidak ditemukan";
-                                else
-                                    $reply .= ";$prov $kab $nks tidak ditemukan";
-                            }
-                           
-                                
-                            /*
-                            }
-                            else
-                            {
-                                $reply = "Format wilayah anda salah, ulangi lagi";
-                            }
-                            */
+                    if($total_row>0)
+                    {
+                        $total_grade=0; $total_sks=0;
+                        while ($row = mysql_fetch_assoc($hasil_check)) {
+                            $total_grade+=($row['grade_value']*$row['sks']);
+                            $total_sks+=$row['sks'];
                         }
-                        else if(count($pecah)<6)
-                        {
-                            if($skey==0)
-                                $reply = "SMS belum lengkap, ulangi lagi";
-                            else
-                                $reply .= ";SMS belum lengkap, ulangi lagi";
-                            
-                        }
-                        else
-                        {
-                            if($skey==0)
-                                $reply="Format salah, ulangi lagi";
-                            else
-                                $reply.=";Format salah, ulangi lagi";
-                        }
+                        // echo "GRADE:".$total_grade;
+                        // echo "SKS:".$total_sks;
+                        $ipk = $total_grade/$total_sks;
+                        $reply="IPK ".$total_word[1]." : $ipk";
+                    }
+                    else{
+                        $reply=$total_word[1]." tidak terdaftar atau belum mengikuti kuliah";
                     }
                 }
-                else
+            }
+            else if(count($total_word)==3){
+                if($total_word[0]="ABSENSI")
                 {
-                    $reply = "Nomor tidak terdaftar";
+                    //check if class exist
+                    $sql_check_kelas="SELECT * FROM `kelas` WHERE id=".$total_word[1];
+
+                    $hasil_check_kelas=mysql_query($sql_check_kelas);
+                    $total_kelas=mysql_num_rows($hasil_check_kelas);
+
+                    if($total_kelas>0)
+                    {
+                        //check if mahasiswa exist
+                        //query the absensi
+                        $sql_absen="SELECT mk.* FROM mahasiswa_kelas mk, mahasiswas m WHERE m.nim=".$total_word[2]." AND mk.mahasiswa_id=m.id AND mk.kelas_id=".$total_word[1];
+
+                        $hasil_absen=mysql_query($sql_absen);
+                        $total_absen=mysql_num_rows($hasil_absen);
+                        if($total_absen>0){
+                            $total_satu=0;
+                            $total_pertemuan=0;
+                            
+                            $row = mysql_fetch_assoc($hasil_absen);
+
+                            for($i=1;$i<=28;++$i){
+                                if($row['abs'.$i]!=null){
+                                    $total_pertemuan++;
+                                    if($row['abs'.$i]==1){
+                                        $total_satu++;
+                                    }
+                                }
+                            }
+
+                            $persen_absen=$total_satu/$total_pertemuan*100;
+
+                            $reply="Persentase absensi ".$total_word[2]." ".$persen_absen." %";
+                        }
+                        else{
+                            $reply=$total_word[2]." tidak terdaftar atau belum mengikuti kuliah";
+                        }
+
+                    }
+                    else{
+                        $reply="Kelas tidak terdaftar";
+                    }
+
+                }
+                else{
+                    $reply="Format salah, ulangi lagi";
                 }
             }
-            else
-            {
-                $reply="Format salah, ulangi lagi";
+            else{
+                $reply = "Format salah, ulangi lagi";  
             }
         }
         else
         {
-             $reply = "Pesan yang anda kirim melebihi 160 karakter, ulangi tanpa melebihi 160 karakter";   
+             $reply = "Format salah, ulangi lagi";   
         }
 
-        //echo $reply;
-        //if($noPengirim="08999826256" || $noPengirim="+628999826256")
-        //{
             
-            $query3 = "INSERT INTO outbox(DestinationNumber, TextDecoded, creatorID) VALUES('$noPengirim','$reply','Gammu')";
-            mysql_query($query3);
-            //ubah nilai ‘processed’ menjadi ‘true’ untuk setiap SMS
-            //yang telah diproses
-            $query3 = "UPDATE inbox SET Processed = 'true' WHERE ID = '$id'";
-            mysql_query($query3);
-            
-        //}
+        $query3 = "INSERT INTO outbox(DestinationNumber, TextDecoded, creatorID) VALUES('$noPengirim','$reply','Gammu')";
+        mysql_query($query3);
+        //ubah nilai ‘processed’ menjadi ‘true’ untuk setiap SMS
+        //yang telah diproses
+        $query3 = "UPDATE inbox SET Processed = 'true' WHERE ID = '$id'";
+        mysql_query($query3);
     }
+        // echo $reply;
 ?>
