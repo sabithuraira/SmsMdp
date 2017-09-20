@@ -5,21 +5,21 @@
 
 
     //query untuk membaca SMS yang belum diproses
-    // $query = "SELECT * FROM inbox WHERE Processed = 'false'";
-    // $hasil = mysql_query($query);
+    $query = "SELECT * FROM inbox WHERE Processed = 'false'";
+    $hasil = $conn->query($query);
 
-    // while($data= mysql_fetch_array($hasil)){
+    while($data = $hasil->fetch_array()){ //mysql_fetch_array($hasil)){
 
     //     //baca id sms
-    //     $id = $data['ID'];
+        $id = $data['ID'];
 
     //     //baca no pengirim
-    //     $noPengirim = $data['SenderNumber'];
+        $noPengirim = $data['SenderNumber'];
     //     //$noPengirim = '+628999826256';
 
     //     //baca pesan SMS dan ubah jadi kapital
-    //     $msg = strtoupper($data['TextDecoded']);
-        $msg="IPK 98990";
+        $msg = strtoupper($data['TextDecoded']);
+        // $msg="IPK 98990";
         //proses parsing
         //pecah pesan berdasarkan karakter
         $reply="";
@@ -116,12 +116,12 @@
         }
 
         
-    //     $query3 = "INSERT INTO outbox(DestinationNumber, TextDecoded, creatorID) VALUES('$noPengirim','$reply','Gammu')";
-    //     mysql_query($query3);
-    //     //ubah nilai ‘processed’ menjadi ‘true’ untuk setiap SMS
-    //     //yang telah diproses
-    //     $query3 = "UPDATE inbox SET Processed = 'true' WHERE ID = '$id'";
-    //     mysql_query($query3);
-    // }
-        echo $reply;
+        $query3 = "INSERT INTO outbox(DestinationNumber, TextDecoded, creatorID) VALUES('$noPengirim','$reply','Gammu')";
+        $conn->query($query3);
+        //ubah nilai ‘processed’ menjadi ‘true’ untuk setiap SMS
+        //yang telah diproses
+        $query3 = "UPDATE inbox SET Processed = 'true' WHERE ID = '$id'";
+        $conn->query($query3);
+    }
+        // echo $reply;
 ?>
