@@ -1,0 +1,38 @@
+BARU !!!!
+
+Tata Cara Pengaktifan SMS Gateway:
+
+Aktifkan aplikasi:
+- Buka XAMPP control panel
+- start Apache dan MySQL
+- Buka command prompt atau ketik "cmd" enter pada start
+- change directori ketik: cd D:\smsmdp
+- jalankan rails, ketik: rails server
+- buka browser, dapat diakses lewat "localhost:3000"
+- login gunakan google atau facebook atau akun username : administrator@email.com, pass: administrator
+
+
+Aktifkan Gammu SMS Gateway:
+- Buka command prompt lagi:
+- arahkan direktori, ketik: "cd C:\gammu\bin"
+- jalankan gammu, ketik : gammu-smsd -c smsdrc
+
+
+
+
+- Semua proses yang berkaitan langsung dg proses SMS otomatis semuanya berpusat pada menu "Kelas, kehadiran dan nilai".
+- Selain menu itu hanya sebagai menu penunjang berkaitan dg data master
+
+- Tahap pertama, buatlah satu buah "kelas" dari menu "Kelas, kehadiran dan nilai"
+- Stelah berhasil membuat kelas baru, akan di redirect ke halaman detail data. Di halaman ini akan tersedia menu untuk meng-update 
+	kelas (menambah  mahasiswa baru pada kelas), mengisi absensi, mengisi nilai
+- FYI, pada menu "Kelas, kehadiran dan nilai", jika sudah ada data kelas, maka akan menampilkan data kelas. 
+	Pilih opsi "Show" untuk melihat data detail kelas.
+- Pilih opsi "Edit" untuk menambah / mengurangi data mahasiswa pada kelas.
+- Pilih opsi "Absensi" untuk mengisi data absensi.
+- Pilih opsi "Nilai" untuk memperbaharui nilai
+  
+
+
+- jika diinput nilai dibawah 60 maka akan mengirim SMS ke hape orang tua
+- HP orang tua dapat di atur pada halaman "Mahasiswa"

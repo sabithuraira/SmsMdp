@@ -1,0 +1,16 @@
+1) User admin (UPT SI), Dosen PA, Dosen MK, Adm)
+- UPT Data Master
+1) SMS pada saat publis nilai IPK kurang dari 2,5 (ADM)
+2) Menu absen per matakuliah (UPT)(adm) dosen MK
+3) SMS persentase absen sebelum UTS kondisi kurang dari 70% ->dosen MK 
+4) Menu Data Mahasiswa (tambah) program studi, alamat, jenis kelamin
+5) Menu berita (misal bayaran) dan button SMS to all -> adm
+6) Menu daftar matakuliah UPT
+7) Menu SMS ke orang tua dari dosen PA (Misal pemberitahuan mahasiswa mengampu skripsi/KP, pemanggilan dalam kasus khusus)
+8) Request SMS contoh nilai NPM
+9) Menu Daftar IPK (Nama Mhs, NPM, IPK) per prodi (ADM)
+10) Input Nilai ABC dosen pengampu
+11) Menu daftar IPK khusus PA
+
+SS:
+No 1 dan 3 SMS dna aplikasi

@@ -1,0 +1,11 @@
+Kalo saat mau menjalanka fungsi "rails server" keluar error "cannot load such file bcrypt_ext",
+jalankan langkah berikut:
+
+1. buka command prompt
+2. Masukkan perintah "gem uninstall bcrypt"
+3. Pilih Option 3 (if exist)
+4. Masukkan perintah "gem uninstall bcrypt-ruby"
+5. Kemudian install bcrypt kembali dg perintah "gem install bcrypt --platform=ruby"
+6. Lalu tambahkan baris ini pada file "Gemfile" yang ada dalam project:
+    gem 'bcrypt', platforms: :ruby
+7. Jalankan aplikasi kembali dg perintah "rails server"    
