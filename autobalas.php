@@ -1,6 +1,4 @@
 <?php
-    // mysql_connect('localhost','root','');
-    // mysql_select_db('smsmdp');
     $conn = new mysqli('localhost', 'root', '', 'smsmdp');
 
 
@@ -8,7 +6,7 @@
     $query = "SELECT * FROM inbox WHERE Processed = 'false'";
     $hasil = $conn->query($query);
 
-    while($data = $hasil->fetch_array()){ //mysql_fetch_array($hasil)){
+    while($data = $hasil->fetch_array()){
 
     //     //baca id sms
         $id = $data['ID'];
@@ -30,22 +28,19 @@
             if(count($total_word)==2){
                 if($total_word[0]=="IPK")
                 {      
-                    // $sql_check="SELECT * FROM m_nks WHERE kode_prov='$prov' AND kode_kab='$kab' AND nks='$nks'";
                     $sql_get_nilai="SELECT m.nim, mk.grade, g.grade_value, k.sks FROM mahasiswas m, mahasiswa_kelas mk, kelas k, grades g WHERE m.nim='".$total_word[1]."' AND mk.mahasiswa_id=m.id AND mk.kelas_id=k.id AND g.grade=mk.grade";
 
-                    $hasil_check= $conn->query($sql_get_nilai); //mysqli_query($connection, $sql_get_nilai);
-                    // $total_row=mysql_num_rows($hasil_check);
+                    $hasil_check= $conn->query($sql_get_nilai); 
 
                     if($hasil_check->num_rows > 0)
                     {
                         $total_grade=0; $total_sks=0;
-                        while ($row = $hasil_check->fetch_assoc()) //mysql_fetch_assoc($hasil_check)) 
+                        while ($row = $hasil_check->fetch_assoc())
                         {
                             $total_grade+=($row['grade_value']*$row['sks']);
                             $total_sks+=$row['sks'];
                         }
-                        // echo "GRADE:".$total_grade;
-                        // echo "SKS:".$total_sks;
+
                         $ipk = $total_grade/$total_sks;
                         $reply="IPK ".$total_word[1]." : $ipk";
                     }
@@ -63,8 +58,7 @@
                     //check if class exist
                     $sql_check_kelas="SELECT * FROM `kelas` WHERE id=".$total_word[1];
 
-                    $hasil_check_kelas= $conn->query($sql_check_kelas);  //mysqli_query($connection,$sql_check_kelas);
-                    // $total_kelas=mysql_num_rows($hasil_check_kelas);
+                    $hasil_check_kelas= $conn->query($sql_check_kelas); 
 
                     if($hasil_check_kelas->num_rows > 0)
                     {
@@ -72,13 +66,12 @@
                         //query the absensi
                         $sql_absen="SELECT mk.* FROM mahasiswa_kelas mk, mahasiswas m WHERE m.nim=".$total_word[2]." AND mk.mahasiswa_id=m.id AND mk.kelas_id=".$total_word[1];
 
-                        $hasil_absen= $conn->query($sql_absen); //mysql_query($sql_absen);
-                        // $total_absen=mysql_num_rows($hasil_absen);
+                        $hasil_absen= $conn->query($sql_absen); 
                         if($hasil_absen->num_rows > 0){
                             $total_satu=0;
                             $total_pertemuan=0;
                             
-                            $row = $hasil_absen->fetch_assoc(); //mysql_fetch_assoc($hasil_absen);
+                            $row = $hasil_absen->fetch_assoc(); 
 
                             for($i=1;$i<=28;++$i){
                                 if($row['abs'.$i]!=null){
