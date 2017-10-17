@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :mp , :as => "mata_pelajarans"
   resources :dosen , :as => "dosens"
   resources :grade , :as => "grades"
+  resources :tagihan , :as => "tagihans"
   resources :mahasiswa , :as => "mahasiswas" do  
    get 'absen', on: :collection   
   end
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   post '/main/search', to: 'main#search'
   post '/kelas/search', to: 'kelas#search'
   post '/dosen/search', to: 'dosen#search'
+  post '/tagihan/search', to: 'tagihan#search'
 
   post '/outbox/search', to: 'outbox#search'
   post '/sentitem/search', to: 'sentitem#search'

@@ -1,0 +1,29 @@
+<!-- /.box-header -->
+<%= form_for @data do |f| %>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-group">
+                <%= f.label :tahun_masuk %>
+                <%= f.number_field :tahun_masuk, class: "form-control", placeholder: "Tahun Masuk" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :bpp %>
+                <%= f.number_field :bpp, class: "form-control", placeholder: "BPP" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :per_sks %>
+                <%= f.number_field :per_sks, class: "form-control", placeholder: "Per SKS" %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-footer">
+    <button type="submit" class="btn btn-info pull-right">Submit</button>
+</div>
+
+<% end %>
