@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822043011) do
+ActiveRecord::Schema.define(version: 20171017125304) do
 
   create_table "absensis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "mahasiswa_id"
@@ -253,6 +253,16 @@ ActiveRecord::Schema.define(version: 20170822043011) do
     t.index ["DestinationNumber"], name: "sentitems_dest", using: :btree
     t.index ["SenderID"], name: "sentitems_sender", using: :btree
     t.index ["TPMR"], name: "sentitems_tpmr", using: :btree
+  end
+
+  create_table "tagihans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "tahun_masuk", limit: 4,                           null: false
+    t.decimal  "bpp",                   precision: 64, scale: 12
+    t.decimal  "per_sks",               precision: 64, scale: 12
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
