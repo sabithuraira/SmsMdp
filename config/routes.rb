@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   post '/outbox/search', to: 'outbox#search'
   post '/sentitem/search', to: 'sentitem#search'
+  delete '/tagihan/sms/:id', to: 'tagihan#sms'
   get '/kelas/absensi/:id', to: 'kelas#absensi'
   get '/kelas/nilai/:id', to: 'kelas#nilai'
   post '/kelas/update_absensi/:id', to: 'kelas#update_absensi'

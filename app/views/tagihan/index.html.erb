@@ -36,6 +36,10 @@
                 <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), tagihan_path(data), class: "btn btn-box-tool btn-default" , 
                     method: :delete,
                     data: { confirm: 'Are you sure?' } %>
+
+                <%= link_to raw('<i class="fa fa-envelope-o"></i> Send SMS'), "tagihan/sms/"+ data.id.to_s, class: "btn btn-box-tool btn-default" , 
+                method: :delete,
+                data: { confirm: 'Are you sure want to sent?' } %>
             </td>
             </tr>
           <% end %>

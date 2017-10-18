@@ -22,7 +22,7 @@ class TagihanController < ApplicationController
         @data = Tagihan.new(tagihan_params)
  
         if @data.save
-            redirect_to @data
+            redirect_to tagihans_path
         else
             render 'new'
         end
@@ -36,7 +36,7 @@ class TagihanController < ApplicationController
         @data = Tagihan.find(params[:id])
         
         if @data.update(tagihan_params)
-            redirect_to @data
+            redirect_to tagihans_path
         else
             render 'edit'
         end
@@ -44,6 +44,22 @@ class TagihanController < ApplicationController
 
     def show
         @data = Tagihan.find(params[:id])
+    end
+
+
+    def sms
+        @data = Tagihan.find(params[:id])
+
+        @mahasiswas = Mahasiswa.where('SUBSTRING(nim,1,4)=?',@data.tahun_masuk)
+        @mahasiswas.each do |m|
+            sms = Outbox.new
+            sms.DestinationNumber= m.parent_phone
+            sms.TextDecoded= "Salam, bayaran nilai dari #{m.name} BPP adalah #{@data.bpp} dan per SKS adalah #{@data.per_sks}. Terima kasih"
+            sms.CreatorID= "Gammu"
+            sms.save
+        end
+        
+        redirect_to tagihans_path
     end
 
     def destroy
