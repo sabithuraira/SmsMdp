@@ -59,6 +59,7 @@ class TagihanController < ApplicationController
             sms.save
         end
         
+        flash[:success] = 'SMS berhasil diinput'
         redirect_to tagihans_path
     end
 
