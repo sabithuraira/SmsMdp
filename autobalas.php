@@ -48,6 +48,54 @@
                         $reply=$total_word[1]." tidak terdaftar atau belum mengikuti kuliah";
                     }
                 }
+                else if($total_word[0]=="BPP"){
+                    $sql_cek_mhs="SELECT * FROM mahasiswas WHERE nim=".$total_word[1];
+                    $cek_mhs= $conn->query($sql_cek_mhs); 
+                    
+                    if($cek_mhs->num_rows > 0)
+                    {
+                        $tahun_npm=substr($total_word[1],0,4);
+                        $sql_bayaran="SELECT * FROM tagihan WHERE tahun_masuk="+$tahun_npm;
+                        $bayaran= $conn->query($sql_bayaran);
+
+                        if($bayaran->num_rows > 0)
+                        {
+                            $data_bayaran = $hasil_check->fetch_assoc();
+                            $bpp = $data_bayaran['bpp'];
+                            $reply="Jumlah BPP yang harus dibayar ".$total_word[1]." adalah Rp.".$bpp;
+                        }
+                        else{
+                            $reply="Data tidak tersedia";
+                        }
+                    }
+                    else{
+                        $reply="NPM tidak terdaftar, silahkan perbaiki NPM";
+                    }
+                }
+                else if($total_word[0]=="SKS"){
+                    $sql_cek_mhs="SELECT * FROM mahasiswas WHERE nim=".$total_word[1];
+                    $cek_mhs= $conn->query($sql_cek_mhs); 
+                    
+                    if($cek_mhs->num_rows > 0)
+                    {
+                        $tahun_npm=substr($total_word[1],0,4);
+                        $sql_bayaran="SELECT * FROM tagihan WHERE tahun_masuk="+$tahun_npm;
+                        $bayaran= $conn->query($sql_bayaran);
+
+                        if($bayaran->num_rows > 0)
+                        {
+                            $data_bayaran = $hasil_check->fetch_assoc();
+                            $sks = $data_bayaran['per_sks']*20;
+                            $reply="Jumlah BPP yang harus dibayar ".$total_word[1]." adalah Rp.".$sks;
+                        }
+                        else{
+                            $reply="Data tidak tersedia";
+                        }
+                    }
+                    else{
+                        $reply="NPM tidak terdaftar, silahkan perbaiki NPM";
+                    }
+                }
                 else{
                     $reply="Format salah, ulangi lagi";
                 }
@@ -98,6 +146,13 @@
                 else{
                     $reply="Format salah, ulangi lagi";
                 }
+            }
+            else if(count($total_word)==1){
+                if($total_word[0]=="HELP")
+                {
+                    $reply="Ketik BPP<spasi>NPM untuk melihat jumlah bayar BPP. Ketik SKS<spasi>NPM untuk melihat jumlah bayar SKS.";
+                }
+
             }
             else{
                 $reply = "Format salah, ulangi lagi";  

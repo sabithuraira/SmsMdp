@@ -54,7 +54,9 @@ class TagihanController < ApplicationController
         @mahasiswas.each do |m|
             sms = Outbox.new
             sms.DestinationNumber= m.parent_phone
-            sms.TextDecoded= "Salam, bayaran nilai dari #{m.name} BPP adalah #{@data.bpp} dan per SKS adalah #{@data.per_sks}. Terima kasih"
+            
+            sms.TextDecoded= "INFO PEMBAYARAN: Jadwal pembayaran BPP/SKS dari dd/mm/yy s/d dd/mm/yy. Ketik HELP untuk bantuan."
+            # sms.TextDecoded= "Salam, bayaran nilai dari #{m.name} BPP adalah #{@data.bpp} dan per SKS adalah #{@data.per_sks}. Terima kasih"
             sms.CreatorID= "Gammu"
             sms.save
         end
