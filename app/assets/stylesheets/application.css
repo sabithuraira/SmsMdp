@@ -14,4 +14,5 @@
  *= require admin-lte/bootstrap/css/bootstrap
  *= require admin-lte/dist/css/AdminLTE
  *= require admin-lte/dist/css/skins/_all-skins
+ *= require admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css
  */

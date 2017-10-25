@@ -7,6 +7,9 @@ class MainController < ApplicationController
         @datas = Nilai.all
     end
 
+    def berita
+    end
+
     def search
         @datas = Nilai.all
         if params[:search]

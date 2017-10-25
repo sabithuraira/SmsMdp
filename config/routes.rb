@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #get '/login', to: 'main#login'
   #post '/login', to: 'main#signin'
   get '/outbox', to: 'outbox#index'
+  get '/berita', to: 'main#berita'
   get '/sentitem', to: 'sentitem#index'
   post '/mp/search', to: 'mp#search'
   post '/mahasiswa/search', to: 'mahasiswa#search'
