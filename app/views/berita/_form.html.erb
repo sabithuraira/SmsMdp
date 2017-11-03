@@ -1,0 +1,30 @@
+<!-- /.box-header -->
+<%= form_for @data, :url => url do |f| %>
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-group">
+                <%= f.label :judul %>
+                <%= f.text_field :judul, class: "form-control", placeholder: "Judul" %>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :informasi %>
+                <%= f.text_field :informasi, class: "form-control", placeholder: "Informasi" %>
+            </div>
+            
+            <div class="form-group">
+                <%= f.check_box :is_sms %> Kirim informasi ini melalui SMS
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="box-footer">
+<!--<button type="submit" class="btn btn-default">Cancel</button>-->
+<button type="submit" class="btn btn-info pull-right">Submit</button>
+</div>
+
+<% end %>

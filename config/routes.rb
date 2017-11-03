@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :mp , :as => "mata_pelajarans"
   resources :dosen , :as => "dosens"
   resources :grade , :as => "grades"
-  resources :tagihan , :as => "tagihans"
+  resources :tagihan , :as => "tagihan"
+  resources :berita, :as => "berita"
   resources :mahasiswa , :as => "mahasiswas" do  
    get 'absen', on: :collection   
   end
@@ -17,7 +18,6 @@ Rails.application.routes.draw do
   #get '/login', to: 'main#login'
   #post '/login', to: 'main#signin'
   get '/outbox', to: 'outbox#index'
-  get '/berita', to: 'main#berita'
   get '/sentitem', to: 'sentitem#index'
   post '/mp/search', to: 'mp#search'
   post '/mahasiswa/search', to: 'mahasiswa#search'
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post '/kelas/search', to: 'kelas#search'
   post '/dosen/search', to: 'dosen#search'
   post '/tagihan/search', to: 'tagihan#search'
+  post '/berita/search', to: 'berita#search'
 
   post '/outbox/search', to: 'outbox#search'
   post '/sentitem/search', to: 'sentitem#search'
