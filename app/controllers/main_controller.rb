@@ -5,6 +5,7 @@ class MainController < ApplicationController
 
     def index
         @datas = Nilai.all
+        @berita = Berita.all
     end
 
     def berita

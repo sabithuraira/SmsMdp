@@ -4,7 +4,7 @@
       <div class="box-header">
         <h3 class="box-title">Daftar Berita</h3>
         
-        <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_beritum_path, class: "btn btn-box-tool btn-default" %> 
+        <%= link_to raw('<i class="fa fa-plus"></i> Add New'), new_berita_path, class: "btn btn-box-tool btn-default" %> 
         <div class="box-tools">
           <%= form_tag({controller: "berita", action: "search"}, method: "post", id: "form_index") do %>
             <div class="input-group input-group-sm" style="width: 150px;">
@@ -32,8 +32,8 @@
             <td><%= data.informasi %></td>
             <td>
                 <%= link_to raw('<i class="fa fa-search"></i> Show'), berita_path(data), class: "btn btn-box-tool btn-default" %>
-                <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_beritum_path(data), class: "btn btn-box-tool btn-default" %>
-                <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), beritum_path(data), class: "btn btn-box-tool btn-default" , 
+                <%= link_to raw('<i class="fa fa-pencil"></i> Edit'), edit_berita_path(data), class: "btn btn-box-tool btn-default" %>
+                <%= link_to raw('<i class="fa fa-remove"></i> Destroy'), berita_path(data), class: "btn btn-box-tool btn-default" , 
                     method: :delete,
                     data: { confirm: 'Are you sure?' } %>
             </td>

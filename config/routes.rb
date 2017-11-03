@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :dosen , :as => "dosens"
   resources :grade , :as => "grades"
   resources :tagihan , :as => "tagihan"
-  resources :berita, :as => "berita"
+  resources :berita, :as => "beritas"
   resources :mahasiswa , :as => "mahasiswas" do  
    get 'absen', on: :collection   
   end

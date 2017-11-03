@@ -22,7 +22,7 @@ class BeritaController < ApplicationController
         @data = Berita.new(berita_params)
  
         if @data.save
-            redirect_to berita_path
+            redirect_to beritas_path
         else
             render 'new'
         end
@@ -36,7 +36,7 @@ class BeritaController < ApplicationController
         @data = Berita.find(params[:id])
         
         if @data.update(berita_params)
-            redirect_to berita_path
+            redirect_to beritas_path
         else
             render 'edit'
         end
@@ -50,7 +50,7 @@ class BeritaController < ApplicationController
         @data = Berita.find(params[:id])
         @data.destroy
         
-        redirect_to berita_path
+        redirect_to beritas_path
     end
 
     private
