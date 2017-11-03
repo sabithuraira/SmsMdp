@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017125304) do
+ActiveRecord::Schema.define(version: 20171103075003) do
 
   create_table "absensis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "mahasiswa_id"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20171017125304) do
     t.integer  "updated_by"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "berita", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "judul"
+    t.text     "informasi",  limit: 65535
+    t.boolean  "is_sms"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "daemons", id: false, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|

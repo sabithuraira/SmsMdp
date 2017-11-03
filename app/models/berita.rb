@@ -1,0 +1,2 @@
+class Berita < ApplicationRecord
+end
