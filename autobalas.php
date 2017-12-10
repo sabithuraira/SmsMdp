@@ -163,9 +163,10 @@
              $reply = "Format salah, ulangi lagi";   
         }
 
-        
-        $query3 = "INSERT INTO outbox(DestinationNumber, TextDecoded, creatorID) VALUES('$noPengirim','$reply','Gammu')";
-        $conn->query($query3);
+        if(strlen($noPengirim)>8){
+            $query3 = "INSERT INTO outbox(DestinationNumber, TextDecoded, creatorID) VALUES('$noPengirim','$reply','Gammu')";
+            $conn->query($query3);
+        }
         //ubah nilai ‘processed’ menjadi ‘true’ untuk setiap SMS
         //yang telah diproses
         $query3 = "UPDATE inbox SET Processed = 'true' WHERE ID = '$id'";

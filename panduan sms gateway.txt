@@ -33,6 +33,5 @@ Aktifkan Gammu SMS Gateway:
 - Pilih opsi "Nilai" untuk memperbaharui nilai
   
 
-
 - jika diinput nilai dibawah 60 maka akan mengirim SMS ke hape orang tua
 - HP orang tua dapat di atur pada halaman "Mahasiswa"
